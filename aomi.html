@@ -9,6 +9,7 @@
         <style type="text/css">
             html,body{width:1920px;overflow:auto;height:1080px;margin:0px;border:0px;padding:0px;background-color:rgba(0,0,0,0);}
         </style>
+        <script src="https://cdn.babylonjs.com/babylon.js"></script>
         <script type="text/javascript">
             // ok
             console.log("okaq akari ok!");
@@ -39,6 +40,8 @@ var g = {
             console.log("total render time: " + (window.performance.now() - t0) + "ms.");
         },
         "start": function() {
+            // webgl check
+            console.log(BABYLON);
             // start the network conns
             // net.conn();
         }
@@ -111,4 +114,4 @@ var g = {
         <body id="alpha">
         </body>
     </html>
-    
+
