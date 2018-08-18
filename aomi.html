@@ -48,6 +48,8 @@ var g = {
             sce.back();
             // webgl setup
             gl.init();
+            // lights, camera, meshes
+            gl.action();
         }
     }
 // webgl 
@@ -58,6 +60,13 @@ var gl = {
         gl.a.scene = new BABYLON.Scene(gl.a.engine);
 
         console.log(gl.a);
+    },
+    "action": function() {
+        gl.a.camera = new BABYLON.ArcRotateCamera("Camera", Math.PI/2.0,Math.PI/2.0,2,BABYLON.Vector3.Zero());
+        gl.a.camera.attachControl(sce.a.c.can);
+        gl.a.lights = [];
+        gl.a.lights[0] = new BABYLON.HemisphericLight("Light_0", new.BABYLON.Vector3(1,1,0), gl.a.scene);
+        gl.a.lights[1] = new BABYLON.PointLight("Light_1", new BABYLON.Vector3(0,1,-1), gl.a.scene);
     }
 }
 // scene
