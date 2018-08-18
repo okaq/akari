@@ -46,8 +46,20 @@ var g = {
             // net.conn();
             // make the scene
             sce.back();
+            // webgl setup
+            gl.init();
         }
     }
+// webgl 
+var gl = {
+    "init": function() {
+        gl.a = {};
+        gl.a.engine = new BABYLON.Engine(sce.a.c.can, true);
+        gl.a.scene = new BABYLON.Scene(gl.a.engine);
+
+        console.log(gl.a);
+    }
+}
 // scene
 var sce = {
     "back": function() {
