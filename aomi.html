@@ -61,10 +61,21 @@ var gl = {
         gl.a.engine = new BABYLON.Engine(sce.a.c.can, true);
         gl.a.scene = new BABYLON.Scene(gl.a.engine);
 
+        // fps rate limit
+        gl.optim();
+
         console.log(gl.a);
     },
+    "optim": function() {
+        // scene optimizer
+        var d0 = new BABYLON.SceneOptimizerOptions(1,1000);
+        console.log(d0.targetFrameRate);
+        d0.optimizations.push(new BABYLON.ShadowsOptimization(1));
+        console.log(d0.optimizations);
+        gl.a.optimizer = new BABYLON.SceneOptimizer(gl.a.scene, d0);
+    },
     "action": function() {
-        gl.a.camera = new BABYLON.ArcRotateCamera("Camera", Math.PI/2.0, Math.PI/2.0, 20, BABYLON.Vector3.Zero(), gl.a.scene);
+        gl.a.camera = new BABYLON.ArcRotateCamera("Camera", Math.PI/2.0, Math.PI/2.0, 2, BABYLON.Vector3.Zero(), gl.a.scene);
         gl.a.camera.attachControl(sce.a.c.can, true);
         gl.a.lights = [];
         gl.a.lights[0] = new BABYLON.HemisphericLight("Light_0", new BABYLON.Vector3(1,1,0), gl.a.scene);
