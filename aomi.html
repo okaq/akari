@@ -100,11 +100,20 @@ var gl = {
                     var d0 = {};
                     // cubic
                     // d0["size"] = 0.05;
-                    d0["width"] = 0.05;
-                    d0["height"] = 0.05;
-                    d0["depth"] = 0.05;
+                    d0["width"] = 0.01;
+                    d0["height"] = 0.01;
+                    d0["depth"] = 0.01;
+                    var c0 = [];
+                    for (var i0 = 0; i0 < 6; i0++) {
+                        c0[i0] = new BABYLON.Color3(Math.random(),Math.random(),Math.random());
+                    }
+                    d0["faceColors"] = c0;
                     var s0 = "Sphere_" + i;
                     var m0 = BABYLON.MeshBuilder.CreateBox(s0, d0, gl.a.scene);
+                    m0.position = new BABYLON.Vector3(x,y,z);
+                    m0.rotation.x = Math.PI * 2.0 * Math.random();
+                    m0.rotation.y = Math.PI * 2.0 * Math.random();
+                    m0.rotation.z = Math.PI * 2.0 * Math.random();
                     gl.a.sphere[i] = m0;
                     i = i + 1;
                 }
