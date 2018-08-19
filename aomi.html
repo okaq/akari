@@ -50,6 +50,8 @@ var g = {
             gl.init();
             // lights, camera, meshes
             gl.action();
+            // render loop
+            gl.ren();
         }
     }
 // webgl 
@@ -62,11 +64,19 @@ var gl = {
         console.log(gl.a);
     },
     "action": function() {
-        gl.a.camera = new BABYLON.ArcRotateCamera("Camera", Math.PI/2.0,Math.PI/2.0,2,BABYLON.Vector3.Zero());
-        gl.a.camera.attachControl(sce.a.c.can);
+        gl.a.camera = new BABYLON.ArcRotateCamera("Camera", Math.PI/2.0, Math.PI/2.0, 2 , BABYLON.Vector3.Zero(), gl.a.scene);
+        gl.a.camera.attachControl(sce.a.c.can, true);
         gl.a.lights = [];
-        gl.a.lights[0] = new BABYLON.HemisphericLight("Light_0", new.BABYLON.Vector3(1,1,0), gl.a.scene);
+        gl.a.lights[0] = new BABYLON.HemisphericLight("Light_0", new BABYLON.Vector3(1,1,0), gl.a.scene);
         gl.a.lights[1] = new BABYLON.PointLight("Light_1", new BABYLON.Vector3(0,1,-1), gl.a.scene);
+        gl.a.sphere = [];
+        gl.a.sphere[0] = BABYLON.MeshBuilder.CreateSphere("Sphere_0", {"diameter":1.0}, gl.a.scene);
+    },
+    "ren": function() {
+        gl.a.engine.runRenderLoop(gl.frame);
+    },
+    "frame": function() {
+        gl.a.scene.render();
     }
 }
 // scene
@@ -81,6 +91,8 @@ var sce = {
         sce.a.c.can.dataset.x = "back_0";
         // event
         sce.a.c.can.addEventListener("click", sce.hand, false);
+        // dom
+        dom.add(sce.a.c);
     },
     "hand": function(e) {
         console.log(e);
