@@ -64,13 +64,14 @@ var gl = {
         console.log(gl.a);
     },
     "action": function() {
-        gl.a.camera = new BABYLON.ArcRotateCamera("Camera", Math.PI/2.0, Math.PI/2.0, 2 , BABYLON.Vector3.Zero(), gl.a.scene);
+        gl.a.camera = new BABYLON.ArcRotateCamera("Camera", Math.PI/2.0, Math.PI/2.0, 20, BABYLON.Vector3.Zero(), gl.a.scene);
         gl.a.camera.attachControl(sce.a.c.can, true);
         gl.a.lights = [];
         gl.a.lights[0] = new BABYLON.HemisphericLight("Light_0", new BABYLON.Vector3(1,1,0), gl.a.scene);
         gl.a.lights[1] = new BABYLON.PointLight("Light_1", new BABYLON.Vector3(0,1,-1), gl.a.scene);
         gl.a.sphere = [];
-        gl.a.sphere[0] = BABYLON.MeshBuilder.CreateSphere("Sphere_0", {"diameter":1.0}, gl.a.scene);
+        // gl.a.sphere[0] = BABYLON.MeshBuilder.CreateSphere("Sphere_0", {"diameter":1.0}, gl.a.scene);
+        gl.subs();
     },
     "ren": function() {
         gl.a.engine.runRenderLoop(gl.frame);
@@ -80,10 +81,21 @@ var gl = {
     },
     "subs": function() {
         // 3d grid subdivision of space
+        var i = 0;
         for (var z = -1.0; z <= 1.0; z+=0.1) {
             for (var y = -1.0; y <= 1.0; y+=0.1) {
                 for (var x = -1.0; x <= 1.0; x+=0.1) {
                     // random mesh generator
+                    var d0 = {};
+                    // cubic
+                    // d0["size"] = 0.05;
+                    d0["width"] = 0.05;
+                    d0["height"] = 0.05;
+                    d0["depth"] = 0.05;
+                    var s0 = "Sphere_" + i;
+                    var m0 = BABYLON.MeshBuilder.CreateBox(s0, d0, gl.a.scene);
+                    gl.a.sphere[i] = m0;
+                    i = i + 1;
                 }
             }
         }
