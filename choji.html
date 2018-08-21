@@ -29,7 +29,7 @@ var g = {
             console.log("start akari...");
 
             // subs
-            g.subs = [dom];
+            g.subs = [dom,sce];
             g.subs.forEach(function(el){el.init();});
             g.s = 0;
 
@@ -39,7 +39,31 @@ var g = {
             console.log("total render time: " + (window.performance.now() - t0) + "ms.");
         },
         "start": function() {
+            ren.bkgd();
         }
+}
+// scene
+var sce = {
+    "init": function() {
+        // bkgd
+        sce.a = {};
+        sce.a.r = [1920,1080,0,0];
+        sce.a.c = dom.canvas(sce.a.r);
+        dom.add(sce.a.c);
+        sce.a.d = rgba.rmon();
+        sce.a.c.can.dataset.x = "bkgd_0";
+        sce.a.c.can.addEventListener("click", sce.click, false);
+    },
+    "click": function(e) {
+        console.log(e);
+    }
+}
+// render
+var ren = {
+    "bkgd": function() {
+        sce.a.c.con.fillStyle = sce.a.c.d;
+        sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+    }
 }
     // dom
     var dom = {
