@@ -178,8 +178,40 @@ var ren = {
        "scale": function() {
         // bit array library
         // translate, rotate, rows, cols, shuffle
+
+        // assumes 32x32 input, size = 1024
+       },
+       "rows": function(b0) {
+            var r0 = [];
+            for (var i = 0; i < 1024; i++) {
+                var x0 = i % 32;
+                var y0 = (i / 32) >>> 0;
+                if (r0[x0] == null) {
+                    r0[x0] = [];
+                }
+                r0[x0][y0] = b0[i];
+            }
+            return r0;
+       },
+       "cols": function(b0) {
+           var r0 = [];
+           for (var i = 0; i < 1024; i++) {
+               var x0 = i % 32;
+               var y0 = (i / 32) >>> 0;
+               if (r0[y0] == null) {
+                   r0[y0] = [];
+               }
+               r0[y0][x0] = b0[i];
+           }
+           return r0;
        }
-   } 
+   }
+// tests
+var test = {
+    "bit": function() {
+        // assert data passes
+    }
+}
     // bitmap
     var bmp = {
         "init": function() {
