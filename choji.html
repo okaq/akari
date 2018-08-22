@@ -63,6 +63,32 @@ var sce = {
     },
     "click": function(e) {
         console.log(e);
+    },
+    "grid": function() {
+        // text grid
+        // renders to single bkgd full screen canvas2d
+        sce.b = {};
+        sce.b.r = [];
+        sce.b.d = [];
+        for (var i = 0; i < 1024; i++) {
+            var x0 = 1 % 32;
+            var y0 = (i / 32) >>> 0;
+            var x1 = (x0 * 32) >>> 0;
+            var y1 = (y0 * 32) >>> 0;
+            sce.b.r[i] = [32,32,x1,y1];
+        }
+        sce.b.d[0] = rgba.css([0,0,0,1.0]);
+        sce.b.d[1] = rgba.css([255,255,255,1.0]);
+    }
+}
+// text
+var txt = {
+    "line": function(s0, g0) {
+        // draw text input at grid (x,y)
+        // check input sanity
+    },
+    "clear": function(s0, g0) {
+        // clear grid cells at (x,y) length input stirng
     }
 }
 // render
