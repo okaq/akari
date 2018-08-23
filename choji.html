@@ -40,6 +40,8 @@ var g = {
         },
         "start": function() {
             ren.bkgd();
+            // testing
+            test.bit();
         }
 }
 // data
@@ -181,7 +183,7 @@ var ren = {
 
         // assumes 32x32 input, size = 1024
        },
-       "rows": function(b0) {
+       "cols": function(b0) {
             var r0 = [];
             for (var i = 0; i < 1024; i++) {
                 var x0 = i % 32;
@@ -193,7 +195,7 @@ var ren = {
             }
             return r0;
        },
-       "cols": function(b0) {
+       "rows": function(b0) {
            var r0 = [];
            for (var i = 0; i < 1024; i++) {
                var x0 = i % 32;
@@ -210,6 +212,13 @@ var ren = {
 var test = {
     "bit": function() {
         // assert data passes
+        var d0 = [];
+        for (var i = 0; i < 1024; i++) {
+            d0[i] = i;
+        }
+        var r0 = bit.rows(d0);
+        var c0 = bit.cols(d0);
+        console.log(r0, c0);
     }
 }
     // bitmap
