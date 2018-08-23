@@ -88,9 +88,25 @@ var txt = {
     "line": function(s0, g0) {
         // draw text input at grid (x,y)
         // check input sanity
+        if (s0.length > 60) {
+            console.log("too big word");
+            return;
+        }
+        var b0 = txt.bmp(s0);
+        
     },
     "clear": function(s0, g0) {
         // clear grid cells at (x,y) length input stirng
+    },
+    "bmp": function(s0) {
+        // text to bmp font data
+        var b0 = [];
+        for (var i = 0; i < s0.length; i++) {
+            var s1 = s0[i];
+            // check char exists
+            b0[i] = bmp.a[s1];
+        }
+        return b0;
     }
 }
 // render
