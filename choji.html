@@ -93,6 +93,14 @@ var txt = {
             return;
         }
         var b0 = txt.bmp(s0);
+        var x0 = g0[0];
+        var y0 = g0[1];
+        for (var i = 0; i < b0.length; i++) {
+            var b1 = b0[i];
+            var x1 = ((i * 32) + x0) >>> 0;
+            var g1 = [x1,y0];
+            ren.bmp(b0, g1);
+        }
         
     },
     "clear": function(s0, g0) {
@@ -114,6 +122,21 @@ var ren = {
     "bkgd": function() {
         sce.a.c.con.fillStyle = sce.a.c.d;
         sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+    },
+    "bmp": function(b0, g0) {
+        sce.a.c.con.fillStyle = rgba.css([0,0,0,1.0]);
+        var x0 = g0[0];
+        var y0 = g0[1];
+        for (var i = 0; i < b0.length; i++) {
+            var x1 = i % 32;
+            var y1 = (i / 32);
+            var x2 = (x0 + x1) >>> 0;
+            var y2 = (y0 + y1) >>> 0;
+            var b1 = b0[i];
+            if (b1 == 1) {
+                sce.a.c.con.fillRect(1,1,x2,y2);
+            }
+        }
     }
 }
     // dom
