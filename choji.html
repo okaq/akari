@@ -119,6 +119,21 @@ var txt = {
         return b0;
     }
 }
+// data
+var db = {
+    "init": function() {
+        // master list
+        db.a = {};
+    }
+}
+// xhr
+var net = {
+    "init": function() {
+        // establish server sync
+        net.urls = {};
+        net.urls["pid"] = "http://localhost:8080/a";
+    }
+}
 // render
 var ren = {
     "bkgd": function() {

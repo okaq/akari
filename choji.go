@@ -19,11 +19,17 @@ func ChojiHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w, r, INDEX)
 }
 
+func PidHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	// generate player id
+}
+
 func main() {
 	fmt.Println("start okaq web on localhost:8080")
 	// time
 	fmt.Printf("start time: %s\n", time.Now().String())
 	http.HandleFunc("/", ChojiHandler)
+	http.HandleFunc("/", PidHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
