@@ -51,6 +51,14 @@ var db = {
     "init": function() {
         db.a = {};
         db.a["bkgd_0"] = sce.a;
+        db.a["pid_0"] = db.play();
+    },
+    "play": function() {
+        // generate a player id
+        var s0 = (Math.random() * Number.MAX_SAFE_INTEGER) >>> 0;
+        var s1 = Date.now();
+        var s2 = s0 + ":" + s1;
+        return s2;
     }
 }
 // scene

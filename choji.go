@@ -29,7 +29,7 @@ func main() {
 	// time
 	fmt.Printf("start time: %s\n", time.Now().String())
 	http.HandleFunc("/", ChojiHandler)
-	http.HandleFunc("/", PidHandler)
+	http.HandleFunc("/a", PidHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
