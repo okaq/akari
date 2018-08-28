@@ -22,6 +22,11 @@ func ChojiHandler(w http.ResponseWriter, r *http.Request) {
 func PidHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	// generate player id
+
+	// pipeline 
+	// parse json request {"pid":value}
+	// generate server id
+	// return json response
 }
 
 func main() {
