@@ -140,6 +140,10 @@ var net = {
         // establish server sync
         net.urls = {};
         net.urls["pid"] = "http://localhost:8080/a";
+    },
+    "send": function() {
+        net.a = new XMLHttpRequest();
+        net.a.open = net.urls[0];
     }
 }
 // render
