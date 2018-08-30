@@ -29,12 +29,22 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
 	// return json response
 }
 
+func StatsHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	// return text stats
+
+	// unique page txt/plain
+	// with basic page stats
+	// include atomic requests counter
+}
+
 func main() {
 	fmt.Println("start okaq web on localhost:8080")
 	// time
 	fmt.Printf("start time: %s\n", time.Now().String())
 	http.HandleFunc("/", ChojiHandler)
 	http.HandleFunc("/a", PidHandler)
+	http.HandleFunc("/s", StatsHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
