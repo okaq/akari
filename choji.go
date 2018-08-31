@@ -14,6 +14,11 @@ const (
 	INDEX = "choji.html"
 )
 
+type Pid struct {
+	// cache
+	// atomic counters
+}
+
 func ChojiHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	http.ServeFile(w, r, INDEX)
@@ -51,4 +56,6 @@ func main() {
 // run atomic ops as separate server
 // auth is simply generated id in memory cache
 
-
+// Pid class
+// one stop shop for all token pipeline methods
+// even handles json responses
