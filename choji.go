@@ -48,4 +48,7 @@ func main() {
 	http.ListenAndServe(":8080", nil)
 }
 
+// run atomic ops as separate server
+// auth is simply generated id in memory cache
+
 
