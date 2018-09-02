@@ -29,7 +29,7 @@ var g = {
             console.log("start akari...");
 
             // subs
-            g.subs = [dom,sce,bmp,db];
+            g.subs = [dom,sce,bmp,db,net];
             g.subs.forEach(function(el){el.init();});
             g.s = 0;
 
@@ -44,6 +44,8 @@ var g = {
             test.bit();
             // line test
             txt.line("SACAGAWEHA", [4,4]);
+            // serve sync
+            net.send();
         }
 }
 // data
@@ -136,8 +138,8 @@ var net = {
     },
     "send": function() {
         net.a = new XMLHttpRequest();
-        net.a.open("GET", net.urls[0]);
-        net.a.addEventtListener("load", net.id);
+        net.a.open("GET", net.urls["pid"]);
+        net.a.addEventListener("load", net.id);
         var p0 = {"pid":db.a["pid_0"]};
         net.a.d = JSON.stringify(p0);
         net.a.responseType = "json";
