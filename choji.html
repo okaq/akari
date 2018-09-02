@@ -136,7 +136,15 @@ var net = {
     },
     "send": function() {
         net.a = new XMLHttpRequest();
-        net.a.open = net.urls[0];
+        net.a.open("GET", net.urls[0]);
+        net.a.addEventtListener("load", net.id);
+        var p0 = {"pid":db.a["pid_0"]};
+        net.a.d = JSON.stringify(p0);
+        net.a.responseType = "json";
+        net.a.send(net.a.d);
+    },
+    "id": function(e) {
+        console.log(e);
     }
 }
 // render
