@@ -8,6 +8,7 @@ import (
 	// "bytes"
 	"encoding/json"
 	"fmt"
+	"math/rand"
 	"net/http"
 	"time"
 )
@@ -26,21 +27,21 @@ type Player struct {
 }
 
 type Id struct {
-	Pid string
-	Sid string
+	Pid string `json:"Pid"`
+	Sid string `json:"Sid"`
 }
 
 func NewId(s string) *Id {
 	i0 := Id{}
 	i0.Pid = s
-	i0.Sid = Id.Generate()
-	return &io
+	i0.Sid = i0.Generate()
+	return &i0
 }
 
 func (id *Id) Generate() string {
 	// var b0 bytes.Buffer
 	s0 := time.Now().UnixNano()
-	s1 := rand.New(rand.NewSource(s0)).Int64()
+	s1 := rand.New(rand.NewSource(s0)).Int63()
 	s2 := fmt.Sprintf("%d:%d", s0, s1)
 	return s2
 }
@@ -64,6 +65,8 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 	fmt.Println(p0)
+	i0 := NewId(p0.Pid)
+	fmt.Println(i0)
 
 	// pipeline 
 	// parse json request {"pid":value}
