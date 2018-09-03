@@ -5,6 +5,7 @@
 package main
 
 import (
+	// "bytes"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -22,6 +23,31 @@ type Pid struct {
 
 type Player struct {
 	Pid string `json:"Pid"`
+}
+
+type Id struct {
+	Pid string
+	Sid string
+}
+
+func NewId(s string) *Id {
+	i0 := Id{}
+	i0.Pid = s
+	i0.Sid = Id.Generate()
+	return &io
+}
+
+func (id *Id) Generate() string {
+	// var b0 bytes.Buffer
+	s0 := time.Now().UnixNano()
+	s1 := rand.New(rand.NewSource(s0)).Int64()
+	s2 := fmt.Sprintf("%d:%d", s0, s1)
+	return s2
+}
+
+func (id *Id) String() string {
+	s0 := fmt.Sprintf("%s;%s", id.Pid, id.Sid)
+	return s0
 }
 
 func ChojiHandler(w http.ResponseWriter, r *http.Request) {
