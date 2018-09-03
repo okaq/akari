@@ -5,6 +5,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"time"
@@ -19,6 +20,10 @@ type Pid struct {
 	// atomic counters
 }
 
+type Player struct {
+	Pid string `json:"Pid"`
+}
+
 func ChojiHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	http.ServeFile(w, r, INDEX)
@@ -27,6 +32,12 @@ func ChojiHandler(w http.ResponseWriter, r *http.Request) {
 func PidHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	// generate player id
+	var p0 Player
+	err := json.NewDecoder(r.Body).Decode(&p0)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(p0)
 
 	// pipeline 
 	// parse json request {"pid":value}

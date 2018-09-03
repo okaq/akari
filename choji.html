@@ -138,11 +138,12 @@ var net = {
     },
     "send": function() {
         net.a = new XMLHttpRequest();
-        net.a.open("GET", net.urls["pid"]);
+        net.a.open("POST", net.urls["pid"]);
         net.a.addEventListener("load", net.id);
-        var p0 = {"pid":db.a["pid_0"]};
+        var p0 = {"Pid":db.a["pid_0"]};
         net.a.d = JSON.stringify(p0);
         net.a.responseType = "json";
+        net.a.requestType = "json";
         net.a.send(net.a.d);
     },
     "id": function(e) {
