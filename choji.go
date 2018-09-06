@@ -20,6 +20,8 @@ const (
 type Pid struct {
 	// cache
 	// atomic counters
+	Cache map[string]string
+	Counter int64
 }
 
 type Player struct {
