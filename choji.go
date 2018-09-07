@@ -85,6 +85,12 @@ func StatsHandler(w http.ResponseWriter, r *http.Request) {
 	// include atomic requests counter
 }
 
+func PlayHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	// api endpoint for playstate cache
+	// read write concurrency-safe methods
+}
+
 func main() {
 	fmt.Println("start okaq web on localhost:8080")
 	// time
@@ -92,6 +98,7 @@ func main() {
 	http.HandleFunc("/", ChojiHandler)
 	http.HandleFunc("/a", PidHandler)
 	http.HandleFunc("/s", StatsHandler)
+	http.HandleFunc("/p", PlayHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
