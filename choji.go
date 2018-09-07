@@ -91,6 +91,11 @@ func PlayHandler(w http.ResponseWriter, r *http.Request) {
 	// read write concurrency-safe methods
 }
 
+func BrokerHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	// peer net broker
+}
+
 func main() {
 	fmt.Println("start okaq web on localhost:8080")
 	// time
@@ -99,6 +104,7 @@ func main() {
 	http.HandleFunc("/a", PidHandler)
 	http.HandleFunc("/s", StatsHandler)
 	http.HandleFunc("/p", PlayHandler)
+	http.HandleFunc("/t", BrokerHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
