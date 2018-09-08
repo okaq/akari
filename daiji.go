@@ -15,6 +15,13 @@ const (
 	INDEX = "daiji.html"
 )
 
+type Grid struct {
+	// cells
+	Cells [][]byte
+	// stride
+	Stride uint64
+}
+
 func motd() {
 	fmt.Printf("okaq web serve on localhost:8080\n%s\n", time.Now().String())
 }
