@@ -33,8 +33,26 @@ var g = {
             g.subs = [dom];
             g.subs.forEach(function(el){el.init();});
 
+            // loop
+            window.setTimeout(g.start, 1000);
+
             // stats
             console.log("total render time: " + (window.performance.now() - t0) + "ms.");
+        },
+        "start": function() {
+            g.tick = 0;
+            g.id = window.setInterval(g.frame, 1000);
+            // all timer events will eventually move
+            // to user input handler events
+            // with background processing updates
+        },
+        "frame": function() {
+            console.log("tick count: " + g.tick);
+            if (g.tick >= 16) {
+                console.log("anim finish");
+                window.clearInterval(g.id);
+            }
+            g.tick = g.tick + 1;
         }
 }
     // dom
