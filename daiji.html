@@ -30,7 +30,7 @@ var g = {
             console.log("start akari...");
 
             // subs
-            g.subs = [dom];
+            g.subs = [dom,net];
             g.subs.forEach(function(el){el.init();});
 
             // loop
@@ -54,6 +54,19 @@ var g = {
             }
             g.tick = g.tick + 1;
         }
+}
+// xhr
+var net = {
+    "init": function() {
+        net.a = [];
+        net.a[0] = "http:localhost:8080";
+    },
+    "pid": function() {
+        // generate player id
+    },
+    "sid": function() {
+        // store server side id
+    }
 }
     // dom
     var dom = {
