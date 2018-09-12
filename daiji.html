@@ -61,12 +61,26 @@ var net = {
     "init": function() {
         net.a = [];
         net.a[0] = "http://localhost:8080";
+
+        // get player id
+        net.b = {};
+        net.b["pid"] = net.pid();
+
+        // open conn
+        net.open();
     },
     "pid": function() {
         // generate player id
         var s0 = Date.now();
         var s1 = (Math.random() * Number.MAX_SAFE_INTEGER) >>> 0;
-        net.b = s0 + ":" + s1;
+        var s2 = s0 + ":" + s1;
+        // net.b = {};
+        // net.b["pid"] = s3;
+        return s2;
+    },
+    "open": function() {
+        // send client side pid as json
+        
     },
     "sid": function() {
         // store server side id
