@@ -28,11 +28,20 @@ func motd() {
 
 func DaijiHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
+	http.ServeFile(w,r,INDEX)
+}
+
+func PidHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	// channel sync for updating cache and counter
+	// start receiver in main
+	// store and increment on each send
 }
 
 func main() {
 	motd()
 	http.HandleFunc("/", DaijiHandler)
+	http.HandleFunc("/a", PidHandler)
 	http.ListenAndServe(":8080", nil)
 }
 

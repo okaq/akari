@@ -34,7 +34,8 @@ var g = {
             g.subs.forEach(function(el){el.init();});
 
             // loop
-            window.setTimeout(g.start, 1000);
+            // window.setTimeout(g.start, 1000);
+            // start upon pid round trip complete
 
             // stats
             console.log("total render time: " + (window.performance.now() - t0) + "ms.");
@@ -59,10 +60,13 @@ var g = {
 var net = {
     "init": function() {
         net.a = [];
-        net.a[0] = "http:localhost:8080";
+        net.a[0] = "http://localhost:8080";
     },
     "pid": function() {
         // generate player id
+        var s0 = Date.now();
+        var s1 = (Math.random() * Number.MAX_SAFE_INTEGER) >>> 0;
+        net.b = s0 + ":" + s1;
     },
     "sid": function() {
         // store server side id
