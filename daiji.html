@@ -30,7 +30,7 @@ var g = {
             console.log("start akari...");
 
             // subs
-            g.subs = [dom,net];
+            g.subs = [dom,sce,net];
             g.subs.forEach(function(el){el.init();});
 
             // loop
@@ -56,6 +56,24 @@ var g = {
             g.tick = g.tick + 1;
         }
 }
+// scene
+var sce = {
+    "init": function() {
+        sce.a = {};
+        sce.a.r = [1920,1080,0,0];
+        sce.a.c = dom.canvas(sce.a.r);
+        sce.a.b = rgba.rmon();
+        dom.add(sce.a.c);
+        ren.bkgd();
+    }
+}
+// render
+var ren = {
+    "bkgd": function() {
+        sce.a.c.con.fillStyle = sce.a.b;
+        sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+    }
+}
 // xhr
 var net = {
     "init": function() {
@@ -80,7 +98,7 @@ var net = {
     },
     "open": function() {
         // send client side pid as json
-        
+
     },
     "sid": function() {
         // store server side id
