@@ -65,6 +65,26 @@ var sce = {
         sce.a.b = rgba.rmon();
         dom.add(sce.a.c);
         ren.bkgd();
+    },
+    "hoka": function() {
+        // a sea of random rects
+        sce.b = [];
+        var m0 = (Math.random() * 1024) >>> 0;
+        console.log("drawing hoka: count = " + m0);
+        for (var i = 0; i < m0; i++) {
+            sce.b[i] = sce.rbox();
+        }
+    },
+    "rbox": function() {
+        // random rect clamped to page size
+        var w0 = (Math.random() * 1920) >>> 0;
+        var h0 = (Math.random() * 1080) >>> 0;
+        var x0 = (1920 - w0) >>> 0;
+        var x1 = (Math.random() * x0) >>> 0;
+        var y0 = (1080 - h0) >>> 0;
+        var y1 = (Math.random() * y0) >>> 0;
+        var r0 = [w0,h0,x1,y1];
+        return r0;
     }
 }
 // render
