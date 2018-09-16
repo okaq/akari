@@ -55,7 +55,9 @@ var g = {
                 return;
             }
             sce.hoka();
-            ren.rect();
+            // ren.rect();
+            ren.arc();
+            // functional select of render method
             g.tick = g.tick + 1;
         }
 }
@@ -102,6 +104,19 @@ var ren = {
             sce.a.c.con.strokeStyle = rgba.rmon();
             sce.a.c.con.lineWidth = (2 + (Math.random() * 8)) >>> 0;
             sce.a.c.con.strokeRect(sce.b[i][2],sce.b[i][3],sce.b[i][0],sce.b[i][1]);
+        }
+    },
+    "arc": function() {
+        ren.bkgd();
+        for (var i = 0; i < sce.b.length; i++) {
+            sce.a.c.con.strokeStyle = rgba.rmon();
+            sce.a.c.con.lineWidth = (2 + (Math.random() * 8)) >>> 0;
+            sce.a.c.con.beginPath();
+            var x0 = sce.b[i][2];
+            var y0 = sce.b[i][3];
+            var r0 = (sce.b[i][0] / 2) >>> 0;
+            sce.a.c.con.arc(x0,y0,r0,0,Math.PI * 2);
+            sce.a.c.con.stroke();
         }
     }
 }
