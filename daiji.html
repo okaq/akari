@@ -57,6 +57,10 @@ var g = {
             sce.hoka();
             // ren.rect();
             ren.arc();
+            // plasma pixel manipulation
+            sce.plasma();
+            sce.turb();
+            ren.plasma();
             // functional select of render method
             g.tick = g.tick + 1;
         }
@@ -90,6 +94,12 @@ var sce = {
         var y1 = (Math.random() * y0) >>> 0;
         var r0 = [w0,h0,x1,y1];
         return r0;
+    },
+    "plasma": function() {
+        // pixel manipulation canvas
+    },
+    "turb": function() {
+        // shuffle turbulence
     }
 }
 // render
@@ -118,6 +128,9 @@ var ren = {
             sce.a.c.con.arc(x0,y0,r0,0,Math.PI * 2);
             sce.a.c.con.stroke();
         }
+    },
+    "plasma": function() {
+        // render the offscreen bits
     }
 }
 // xhr
