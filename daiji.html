@@ -97,6 +97,12 @@ var sce = {
     },
     "plasma": function() {
         // pixel manipulation canvas
+        sce.c = {};
+        sce.c.r = [512,512,704,284];
+        sce.c.c = dom.canvas(sce.c.r);
+        dom.add(sce.c.c);
+        sce.c.d = sce.c.c.con.getImageData(0,0,512,512);
+        console.log("data length = " + sce.c.d.data.length);
     },
     "turb": function() {
         // shuffle turbulence
