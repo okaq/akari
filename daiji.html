@@ -59,7 +59,8 @@ var g = {
             ren.arc();
             // plasma pixel manipulation
             sce.plasma();
-            sce.turb();
+            // sce.turb();
+            sce.grad();
             ren.plasma();
             // functional select of render method
             g.tick = g.tick + 1;
@@ -121,6 +122,10 @@ var sce = {
             var d1 = Math.sqrt((512 * 512) + (512 * 512));
             var d2 = d0 / d1;
             var d3 = (d2 * 255) >>> 0;
+            sce.c.d.data[i+0] = d3;
+            sce.c.d.data[i+1] = d3;
+            sce.c.d.data[i+2] = d3;
+            sce.c.d.data[i+3] = d3;
         }
     }
 }
