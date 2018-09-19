@@ -110,6 +110,18 @@ var sce = {
             var f0 = (Math.random() * 255) >>> 0;
             sce.c.d.data[i] = f0;
         }
+    },
+    "grad": function() {
+        // smooth
+        for (var i = 0; i < sce.c.d.data.length; i+=4) {
+            var i0 = (i / 4) >>> 0;
+            var x0 = i0 % 512;
+            var y0 = (i0 / 512) >>> 0;
+            var d0 = Math.sqrt((x0 * x0) + (y0 * y0));
+            var d1 = Math.sqrt((512 * 512) + (512 * 512));
+            var d2 = d0 / d1;
+            var d3 = (d2 * 255) >>> 0;
+        }
     }
 }
 // render
