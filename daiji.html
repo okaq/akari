@@ -106,6 +106,10 @@ var sce = {
     },
     "turb": function() {
         // shuffle turbulence
+        for (var i = 0; i < sce.c.d.data.length; i++) {
+            var f0 = (Math.random() * 255) >>> 0;
+            sce.c.d.data[i] = f0;
+        }
     }
 }
 // render
@@ -137,6 +141,7 @@ var ren = {
     },
     "plasma": function() {
         // render the offscreen bits
+        sce.c.c.con.putImageData(sce.c.d, 0, 0);
     }
 }
 // xhr
