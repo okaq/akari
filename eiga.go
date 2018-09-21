@@ -27,6 +27,7 @@ func EigaHandler(w http.ResponseWriter, r *http.Request) {
 func main() {
 	motd()
 	http.HandleFunc("/", EigaHandler)
+	http.ListenAndServe(":8080", nil)
 }
 
 
