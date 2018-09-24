@@ -39,6 +39,16 @@ var g = {
     "start": function() {
         // webgl init 
         ren.clear();
+        gl.init();
+    }
+}
+// webgl
+var gl = {
+    "init": function() {
+        // create 3d context
+        gl.a = {};
+        gl.a.r = [1024,1024,448,28];
+        gl.a.c = dom.canvas2(gl.a.r);
     }
 }
 // scene
