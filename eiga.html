@@ -49,6 +49,13 @@ var gl = {
         gl.a = {};
         gl.a.r = [1024,1024,448,28];
         gl.a.c = dom.canvas2(gl.a.r);
+        dom.add(gl.a.c);
+        gl.b = gl.a.c.can.getContext("webgl");
+        // console.log(JSON.stringify(gl.a.c.con));
+        console.log(gl.b);
+        // clear
+        gl.b.clearColor(0.0,0.0,0.0,1.0);
+        gl.b.clear(gl.b.COLOR_BUFFER_BIT);
     }
 }
 // scene
