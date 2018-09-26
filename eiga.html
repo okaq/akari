@@ -40,6 +40,8 @@ var g = {
         // webgl init 
         ren.clear();
         gl.init();
+        // gl.prog();
+        gl.buf();
     }
 }
 // webgl
@@ -56,6 +58,16 @@ var gl = {
         // clear
         gl.b.clearColor(0.0,0.0,0.0,1.0);
         gl.b.clear(gl.b.COLOR_BUFFER_BIT);
+    },
+    "prog": function() {
+        // frag, vert shader
+    },
+    "buf": function() {
+        // init buffers
+        gl.c = {};
+        // position
+        gl.c.a = gl.b.createBuffer();
+        gl.b.bindBuffer(gl.b.ARRAY_BUFFER, gl.c.a);
     }
 }
 // scene
