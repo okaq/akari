@@ -74,6 +74,7 @@ var gl = {
             gl.c.b[i] = gl.rv();
         }
         // flatten array of verts
+        gl.c.c = gl.flat(gl.c.b);
     },
     "rv": function() {
         // random vertex in 3-space clipped
@@ -81,6 +82,18 @@ var gl = {
         var y0 = Math.random();
         var z0 = Math.random();
         return [x0,y0,z0];
+    },
+    "flat": function(m0) {
+        // quaternion 4-vec {x,y,z,w}
+        var r0 = [];
+        for (var i = 0; i < m0; i++) {
+            var m1 = m0[i];
+            for (var j = 0; j < m1.length; j++) {
+                r0.push(m1[j]);
+            }
+            r0.push(1.0);
+        }
+        return r0;
     }
 }
 // scene
