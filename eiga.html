@@ -68,6 +68,19 @@ var gl = {
         // position
         gl.c.a = gl.b.createBuffer();
         gl.b.bindBuffer(gl.b.ARRAY_BUFFER, gl.c.a);
+        // verts
+        gl.c.b = [];
+        for (var i = 0; i < 16; i++) {
+            gl.c.b[i] = gl.rv();
+        }
+        // flatten array of verts
+    },
+    "rv": function() {
+        // random vertex in 3-space clipped
+        var x0 = Math.random();
+        var y0 = Math.random();
+        var z0 = Math.random();
+        return [x0,y0,z0];
     }
 }
 // scene
