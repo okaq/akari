@@ -61,6 +61,12 @@ var gl = {
     },
     "prog": function() {
         // frag, vert shader
+        var vs = `
+        varying vec4 verts;
+        `
+        var fs = `
+        uniform vec4 texels;
+        `;
     },
     "buf": function() {
         // init buffers
