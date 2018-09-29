@@ -40,7 +40,7 @@ var g = {
         // webgl init 
         ren.clear();
         gl.init();
-        // gl.prog();
+        gl.prog();
         gl.buf();
     }
 }
@@ -77,7 +77,9 @@ var gl = {
         `;
         // create program
         gl.d = {};
-
+        gl.d.vs = gl.prog2(gl.b.VERTEX_SHADER, vs);
+        gl.d.fs = gl.prog2(gl.b.FRAGMENT_SHADER, fs);
+        gl.d.p = gl.prog3(gl.d.vs,gl.d.fs);
     },
     "prog2": function(t0, s0) {
         // program helper
@@ -90,6 +92,20 @@ var gl = {
         } else {
             console.log(gl.b.getShaderInfoLog(s1));
             gl.b.deleteShader(s1);
+        }
+    },
+    "prog3": function(vs, fs) {
+        // program linker
+        var p0 = gl.b.createProgram();
+        gl.b.attachShader(p0, vs);
+        gl.b.attachShader(p0, fs);
+        gl.b.linkProgram(p0);
+        var s0 = gl.b.getProgramParameter(p0, gl.b.LINK_STATUS);
+        if (s0) {
+            return p0;
+        } else {
+            console.log(gl.b.getProgramInfoLog(p0));
+            gl.b.deleteProgram(p0);
         }
     },
     "buf": function() {
