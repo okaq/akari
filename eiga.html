@@ -62,11 +62,20 @@ var gl = {
     "prog": function() {
         // frag, vert shader
         var vs = `
-        varying vec4 verts;
-        `
-        var fs = `
-        uniform vec4 texels;
+        attribute vec4 a_position;
+
+        void main() {
+            gl_Position = a_position;
+        }
         `;
+        var fs = `
+        precision mediump float;
+
+        void main() {
+            gl_FragColor = vec4(1.0, 0.0, 0.5, 1.0);
+        }
+        `;
+        // create program
     },
     "buf": function() {
         // init buffers
