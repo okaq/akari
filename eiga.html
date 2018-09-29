@@ -76,6 +76,21 @@ var gl = {
         }
         `;
         // create program
+        gl.d = {};
+
+    },
+    "prog2": function(t0, s0) {
+        // program helper
+        var s1 = gl.b.createShader(t0);
+        gl.b.shaderSource(s1,s0);
+        gl.b.compileShader(s1);
+        var s2 = gl.b.getShaderParameter(s1, gl.b.COMPILE_STATUS);
+        if (s2) {
+            return s1;
+        } else {
+            console.log(gl.b.getShaderInfoLog(s1));
+            gl.b.deleteShader(s1);
+        }
     },
     "buf": function() {
         // init buffers
