@@ -80,6 +80,8 @@ var gl = {
         gl.d.vs = gl.prog2(gl.b.VERTEX_SHADER, vs);
         gl.d.fs = gl.prog2(gl.b.FRAGMENT_SHADER, fs);
         gl.d.p = gl.prog3(gl.d.vs,gl.d.fs);
+        // viewport
+        gl.b.viewport(0,0,1920,1080);
     },
     "prog2": function(t0, s0) {
         // program helper
