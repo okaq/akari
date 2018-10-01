@@ -82,6 +82,10 @@ var gl = {
         gl.d.p = gl.prog3(gl.d.vs,gl.d.fs);
         // viewport
         gl.b.viewport(0,0,1920,1080);
+        // attributes
+        gl.e = {};
+        gl.e.a = gl.b.getAttribLocation(gl.d.p, "a_position");
+        
     },
     "prog2": function(t0, s0) {
         // program helper
