@@ -33,11 +33,16 @@ var g = {
             g.subs = [dom,sce,db];
             g.subs.forEach(function(el){el.init();});
 
+            // clear
+            ren.clear();
+
             // loop
             window.setTimeout(g.start, 1000);
         },
         "start": function() {
             // setup array buffer
+            sce.grid();
+            ren.grid();
         }
     }
 // data
@@ -47,6 +52,7 @@ var db = {
         db.a.a = new ArrayBuffer(4096);
         db.a.b = new Uint8Array(db.a.a);
         console.log(db.a);
+        // 64 * 64 = 4096
     },
     "point": function(p0) {
         // get value at point (x,y)
@@ -63,6 +69,24 @@ var sce = {
         dom.add(sce.a.c);
         // event handler
         // dom management
+    },
+    "grid": function() {
+        sce.b = [];
+        for (var i = 0; i < 4096; i++) {
+            // 1 byte per grid square
+            // coded game state for efficiency
+            sce.b[i] = {};
+            var w0 = 16;
+            var h0 = 16;
+            var x0 = i % 64;
+            var y0 = (i / 64) >>> 0;
+            var x1 = (448 + (x0 * 16)) >>> 0;
+            var y1 = (28 + (y0 * 16)) >>> 0;
+            sce.b[i].r = [w0,h0,x1,y1];
+            sce.b[i].c = dom.canvas(sce.b[i].r);
+            sce.b[i].d = rgba.rmon();
+            dom.add(sce.b[i].c);
+        }
     }
 }
     // dom
