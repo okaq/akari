@@ -57,6 +57,12 @@ var db = {
 var sce = {
     "init": function() {
         sce.a = {};
+        sce.a.r = [1920,1080,0,0];
+        sce.a.c = dom.canvas(sce.a.r);
+        sce.a.d = rgba.rmon();
+        dom.add(sce.a.c);
+        // event handler
+        // dom management
     }
 }
     // dom
