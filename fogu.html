@@ -89,6 +89,19 @@ var sce = {
         }
     }
 }
+// render
+var ren = {
+    "clear": function() {
+        sce.a.c.con.fillStyle = sce.a.d;
+        sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+    },
+    "grid": function() {
+        for (var i = 0; I < sce.b.length; i++) {
+            sce.b[i].c.con.fillstyle = sce.b[i].d;
+            sce.b[i].c.con.fillRect(0,0,sce.b[i].c.can.width,sce.b[i].c.can.height);
+        }
+    }
+}
     // dom
     var dom = {
         "init": function() {
