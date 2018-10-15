@@ -86,7 +86,18 @@ var sce = {
             sce.b[i].c = dom.canvas(sce.b[i].r);
             sce.b[i].d = rgba.rmon();
             dom.add(sce.b[i].c);
+            // click register
+            sce.b[i].c.can.addEventListener("click", sce.click, false);
+            sce.b[i].c.can.dataset.x = i.toString();
         }
+    },
+    "click": function(e) {
+        console.log(e);
+        console.log(e.target.dataset.x);
+        var i0 = parseInt(e.target.dataset.x);
+        sce.b[i0].d = rgba.rmon();
+        ren.grid();
+        // just re-render the dirty rect
     }
 }
 // render
