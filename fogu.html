@@ -43,6 +43,17 @@ var g = {
             // setup array buffer
             sce.grid();
             ren.grid();
+
+            g.tick = 0;
+            g.id = window.setInterval(g.frame, 1000);
+        },
+        "frame": function() {
+            console.log("tick count: " + g.tick);
+            if (g.tick >= 16) {
+                window.clearInterval(g.id);
+                console.log("anim done");
+            }
+            g.tick = g.tick + 1;
         }
     }
 // data
