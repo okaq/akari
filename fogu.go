@@ -19,9 +19,15 @@ func FoguHandler(w http.Responsewriter, r *http.Request) {
 	http.ServeFile(w,r,INDEX)
 }
 
+func StatHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	// atmoic counter
+}
+
 func main() {
 	motd()
 	http.HandleFunc("/", FoguHandler)
+	http.HandleFunc("/s", StatHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
