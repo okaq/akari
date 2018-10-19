@@ -68,6 +68,17 @@ var db = {
     "point": function(p0) {
         // get value at point (x,y)
         // alternate: toggle or set value at p0
+    },
+    "reset": function() {
+        // all grid spaces to null or empty
+    },
+    "min": function() {
+        // minimum connect game 
+        // start with 4x4 center squares
+        // white goes first
+        // opponent must pick space adjacent to existing piece
+        // no empty space strategy
+        // simplest AI opponent is random
     }
 }
 // scene
@@ -122,6 +133,12 @@ var ren = {
             sce.b[i].c.con.fillstyle = sce.b[i].d;
             sce.b[i].c.con.fillRect(0,0,sce.b[i].c.can.width,sce.b[i].c.can.height);
         }
+    },
+    "rect": function(i0) {
+        // single grid update
+        sce.b[i0].c.con.fillstyle = sce.b[i0].d;
+        sce.b[i0].c.con.fillRect(0,0,sce.b[i0].c.can.width,sce.b[i0].c.can.height);
+
     }
 }
     // dom

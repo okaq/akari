@@ -21,7 +21,7 @@ func FoguHandler(w http.Responsewriter, r *http.Request) {
 
 func StatHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
-	// atmoic counter
+	// atomic counter
 }
 
 func main() {
