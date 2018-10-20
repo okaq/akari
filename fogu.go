@@ -14,7 +14,7 @@ const (
 	INDEX = "fogu.html"
 )
 
-func FoguHandler(w http.Responsewriter, r *http.Request) {
+func FoguHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	http.ServeFile(w,r,INDEX)
 }
@@ -22,6 +22,11 @@ func FoguHandler(w http.Responsewriter, r *http.Request) {
 func StatHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	// atomic counter
+}
+
+func motd() {
+	fmt.Println("okaq web serving on localhost:8080")
+	fmt.Printf("%s\n", time.Now().String())
 }
 
 func main() {
