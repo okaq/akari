@@ -65,6 +65,11 @@ var db = {
         console.log(db.a);
         // 64 * 64 = 4096
     },
+    "init2": function() {
+        db.b = [];
+        // 0 = empty, 1 = white, 2 = black
+        // requires 2 bytes per grid space
+    },
     "point": function(p0) {
         // get value at point (x,y)
         // alternate: toggle or set value at p0
