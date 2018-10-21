@@ -35,13 +35,14 @@ var g = {
 
             // clear
             ren.clear();
+            sce.grid();
 
             // loop
             window.setTimeout(g.start, 1000);
         },
         "start": function() {
             // setup array buffer
-            sce.grid();
+            // sce.grid();
             ren.grid();
 
             g.tick = 0;
@@ -107,8 +108,8 @@ var sce = {
             var h0 = 16;
             var x0 = i % 64;
             var y0 = (i / 64) >>> 0;
-            var x1 = (448 + (x0 * 16)) >>> 0;
-            var y1 = (28 + (y0 * 16)) >>> 0;
+            var x1 = (448 + (x0 * w0)) >>> 0;
+            var y1 = (28 + (y0 * h0)) >>> 0;
             sce.b[i].r = [w0,h0,x1,y1];
             sce.b[i].c = dom.canvas(sce.b[i].r);
             sce.b[i].d = rgba.rmon();
@@ -123,8 +124,9 @@ var sce = {
         console.log(e.target.dataset.x);
         var i0 = parseInt(e.target.dataset.x);
         sce.b[i0].d = rgba.rmon();
-        ren.grid();
+        // ren.grid();
         // just re-render the dirty rect
+        ren.rect(i0);
     }
 }
 // render
@@ -134,14 +136,14 @@ var ren = {
         sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
     },
     "grid": function() {
-        for (var i = 0; I < sce.b.length; i++) {
-            sce.b[i].c.con.fillstyle = sce.b[i].d;
+        for (var i = 0; i < sce.b.length; i++) {
+            sce.b[i].c.con.fillStyle = sce.b[i].d;
             sce.b[i].c.con.fillRect(0,0,sce.b[i].c.can.width,sce.b[i].c.can.height);
         }
     },
     "rect": function(i0) {
         // single grid update
-        sce.b[i0].c.con.fillstyle = sce.b[i0].d;
+        sce.b[i0].c.con.fillStyle = sce.b[i0].d;
         sce.b[i0].c.con.fillRect(0,0,sce.b[i0].c.can.width,sce.b[i0].c.can.height);
 
     }
