@@ -45,6 +45,9 @@ var g = {
             // sce.grid();
             ren.grid();
 
+            // id generation
+            net.id();
+
             g.tick = 0;
             g.id = window.setInterval(g.frame, 1000);
         },
@@ -91,6 +94,21 @@ var db = {
         // opponent must pick space adjacent to existing piece
         // no empty space strategy
         // simplest AI opponent is random
+    }
+}
+// xhr
+var net = {
+    "id": function() {
+        net.x = new XMLHttpRequest();
+        net.url = [
+            "http://localhost:8080/p"
+        ];
+        net.a = (Number.MAX_SAFE_INTEGER * Math.random()) >>> 0;
+        net.b = new Date().now();
+        net.c = {};
+        net.c["id"] = net.a.toString();
+        net.c["date"] = net.b.toString();
+        console.log(net.c);
     }
 }
 // scene
