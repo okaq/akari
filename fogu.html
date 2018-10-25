@@ -104,11 +104,18 @@ var net = {
             "http://localhost:8080/p"
         ];
         net.a = (Number.MAX_SAFE_INTEGER * Math.random()) >>> 0;
-        net.b = new Date().now();
+        net.b = Date.now();
         net.c = {};
         net.c["id"] = net.a.toString();
         net.c["date"] = net.b.toString();
-        console.log(net.c);
+        net.d = JSON.stringify(net.c);
+        console.log(net.c,net.d);
+        net.x.addEventListener("load", net.pid);
+        net.x.open("POST", net.url[0]);
+        net.x.send(net.d);
+    },
+    "pid": function(e) {
+        console.log(e);
     }
 }
 // scene

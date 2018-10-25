@@ -38,7 +38,7 @@ func main() {
 	motd()
 	http.HandleFunc("/", FoguHandler)
 	http.HandleFunc("/s", StatHandler)
-	http.HandleFunc("/a", PidHandler)
+	http.HandleFunc("/p", PidHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
