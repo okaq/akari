@@ -14,6 +14,10 @@ const (
 	INDEX = "fogu.html"
 )
 
+var (
+	Dict map[string]string
+)
+
 func FoguHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	http.ServeFile(w,r,INDEX)
@@ -36,6 +40,7 @@ func motd() {
 
 func main() {
 	motd()
+	cache()
 	http.HandleFunc("/", FoguHandler)
 	http.HandleFunc("/s", StatHandler)
 	http.HandleFunc("/p", PidHandler)
