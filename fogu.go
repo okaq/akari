@@ -7,6 +7,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 	"sync"
 	"time"
 )
@@ -45,6 +46,13 @@ func FoguHandler(w http.ResponseWriter, r *http.Request) {
 func StatHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	// atomic counter
+	s0 := P.Glean("count")
+	i0, _ := strconv.Atoi(s0)
+	i1 := i0 + 1
+	s1 := strconv.Itoa(i1)
+	P.Update("count",s1)
+	s2 := fmt.Sprintf("hit count: %s\n", s1)
+	w.Write([]byte(s2))
 }
 
 func PidHandler(w http.ResponseWriter, r *http.Request) {
@@ -58,8 +66,9 @@ func motd() {
 }
 
 func cache() {
-	P = Poeme{}
+	P = &Poeme{}
 	P.Dict = make(map[string]string)
+	P.Update("count", "0")
 }
 
 func main() {
