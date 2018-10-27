@@ -15,10 +15,26 @@ const (
 	INDEX = "fogu.html"
 )
 
+var (
+	P *Poeme
+)
+
 // Cache, concurrency safe key value store
 type Poeme struct {
 	Dict map[string]string
 	mu sync.Mutex
+}
+
+func (p *Poeme) Update(k, v string) {
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	p.Dict[k] = v
+}
+
+func (p *Poeme) Glean(k string) string {
+	p.mu.Lock()
+	defer p.mu.Unlock()
+	return p.Dict[k]
 }
 
 func FoguHandler(w http.ResponseWriter, r *http.Request) {
@@ -39,6 +55,11 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
 func motd() {
 	fmt.Println("okaq web serving on localhost:8080")
 	fmt.Printf("%s\n", time.Now().String())
+}
+
+func cache() {
+	P = Poeme{}
+	P.Dict = make(map[string]string)
 }
 
 func main() {
