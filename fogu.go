@@ -7,6 +7,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"sync"
 	"time"
 )
 
@@ -14,9 +15,11 @@ const (
 	INDEX = "fogu.html"
 )
 
-var (
+// Cache, concurrency safe key value store
+type Poeme struct {
 	Dict map[string]string
-)
+	mu sync.Mutex
+}
 
 func FoguHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
