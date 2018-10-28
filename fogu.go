@@ -5,6 +5,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -19,6 +20,12 @@ const (
 var (
 	P *Poeme
 )
+
+// Server side player identity
+type Id struct {
+	Date string
+	Number string
+}
 
 // Cache, concurrency safe key value store
 type Poeme struct {
@@ -58,6 +65,10 @@ func StatHandler(w http.ResponseWriter, r *http.Request) {
 func PidHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	// generate and write player id
+	var p Id
+	d := json.Decoder(r.Body).Decode(&p)
+	fmt.Printf("Date: %s\nNumber: %s\n", p.Date, p.Number)
+
 }
 
 func motd() {
