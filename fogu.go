@@ -47,6 +47,7 @@ func (p *Poeme) Glean(k string) string {
 
 func FoguHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
+	// invoke atomic counter here
 	http.ServeFile(w,r,INDEX)
 }
 
@@ -66,9 +67,16 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	// generate and write player id
 	var p Id
-	d := json.Decoder(r.Body).Decode(&p)
+	err := json.NewDecoder(r.Body).Decode(&p)
+	if err != nil {
+		fmt.Println(err)
+	}
 	fmt.Printf("Date: %s\nNumber: %s\n", p.Date, p.Number)
-
+	// cache this id
+	s0 := fmt.Sprintf("%s|%s", p.Number, p.Date)
+	P.Update(s0, "ok")
+	fmt.Println(P.Dict)
+	// cache pretty print function
 }
 
 func motd() {
