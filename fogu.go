@@ -48,11 +48,20 @@ func (p *Poeme) Glean(k string) string {
 func FoguHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	// invoke atomic counter here
+	Increment()
 	http.ServeFile(w,r,INDEX)
 }
 
 func StatHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
+	// output count
+	s0 := P.Glean("count")
+	s1 := fmt.Sprintf("count: %s", s0)
+	b0 := byte(s1)
+	w.Write(b0)
+}
+
+func Increment() {
 	// atomic counter
 	s0 := P.Glean("count")
 	i0, _ := strconv.Atoi(s0)
@@ -61,6 +70,7 @@ func StatHandler(w http.ResponseWriter, r *http.Request) {
 	P.Update("count",s1)
 	s2 := fmt.Sprintf("hit count: %s\n", s1)
 	w.Write([]byte(s2))
+	// return err on fail
 }
 
 func PidHandler(w http.ResponseWriter, r *http.Request) {
