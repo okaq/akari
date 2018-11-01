@@ -6,17 +6,34 @@ package main
 
 import (
 	"fmt"
+	"io/ioutil"
 	"net/http"
+	"os"
 	"time"
 )
 
 const (
 	INDEX = "hiko.html"
+	// png image folder
+	INPUT = "./hikoa/"
+	// sample data, json, base64 string
+	OUPUT = "./hikob/"
+)
+
+var (
+	// list of png bitmaps
+	Png []os.FileInfo
+	// list json
+	Json []os.FileInfo
 )
 
 func HikoHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	http.ServeFile(w,r,INDEX)
+}
+
+func load() {
+	fmt.Println("reading file directories")
 }
 
 func motd() {
@@ -26,6 +43,7 @@ func motd() {
 
 func main() {
 	motd()
+	load()
 	http.HandleFunc("/", HikoHandler)
 	http.ListenAndServe(":8080", nil)
 }
