@@ -49,5 +49,7 @@ func main() {
 }
 
 // assign bitmap data directories
+// pretty print file info and sync
+// server side and browser client states
 
 
