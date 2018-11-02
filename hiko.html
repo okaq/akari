@@ -34,6 +34,23 @@ var g = {
             g.subs.forEach(function(el){el.init();});
         }
 }
+// xhr
+var net = {
+    "init": function() {
+        // endpoints
+        net.a = [
+            "http://localhost:8080/a",
+            "http://localhost:8080/b",
+            "http://localhost:8080/c"  
+        ];
+        
+        // single request object
+        net.b = new XMLHttpRequest();
+
+        // encode state as enum
+        net.c = 0;
+    }
+}
     // dom
     var dom = {
         "init": function() {
