@@ -32,6 +32,12 @@ var g = {
             // subs
             g.subs = [dom,net];
             g.subs.forEach(function(el){el.init();});
+
+            // wait and begin
+            window.setTimeout(g.start, 1000);
+        },
+        "start": function() {
+            net.bling();
         }
 }
 // xhr
@@ -49,6 +55,10 @@ var net = {
 
         // encode state as enum
         net.c = 0;
+    },
+    "bling": function() {
+        // start by getting file lists
+        net.b.addEventListener("load", net.list);
     }
 }
     // dom
