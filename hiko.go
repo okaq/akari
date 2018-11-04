@@ -17,7 +17,7 @@ const (
 	// png image folder
 	INPUT = "./hikoa/"
 	// sample data, json, base64 string
-	OUPUT = "./hikob/"
+	OUTPUT = "./hikob/"
 )
 
 var (
@@ -34,6 +34,26 @@ func HikoHandler(w http.ResponseWriter, r *http.Request) {
 
 func load() {
 	fmt.Println("reading file directories")
+	var err error
+	Png, err = ioutil.ReadDir(INPUT)
+	if err != nil {
+		fmt.Println(err)
+	}
+	Json, err = ioutil.ReadDir(OUTPUT)
+	if err != nil {
+		fmt.Println(err)
+	}
+	// pretty print file lists
+	fmt.Println("PNG Files...")
+	for _, f0 := range(Png) {
+		fmt.Printf("file name: %s\n", f0.Name())
+		fmt.Printf("file size: %d bytes\n", f0.Size())
+	}
+	fmt.Println("JSON Files...")
+	for _, f0 := range(Json) {
+		fmt.Printf("file name: %s\n", f0.Name())
+		fmt.Printf("file size: %d bytes\n", f0.Size())
+	}
 }
 
 func motd() {

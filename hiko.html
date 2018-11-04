@@ -59,6 +59,11 @@ var net = {
     "bling": function() {
         // start by getting file lists
         net.b.addEventListener("load", net.list);
+        net.b.open("GET", net.a[1]);
+        net.b.send();
+    },
+    "list": function(e) {
+        console.log(e);
     }
 }
     // dom
