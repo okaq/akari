@@ -27,22 +27,7 @@ var (
 	Json []os.FileInfo
 )
 
-func HikoHandler(w http.ResponseWriter, r *http.Request) {
-	fmt.Println(r)
-	http.ServeFile(w,r,INDEX)
-}
-
-func load() {
-	fmt.Println("reading file directories")
-	var err error
-	Png, err = ioutil.ReadDir(INPUT)
-	if err != nil {
-		fmt.Println(err)
-	}
-	Json, err = ioutil.ReadDir(OUTPUT)
-	if err != nil {
-		fmt.Println(err)
-	}
+func Lister() {
 	// pretty print file lists
 	fmt.Println("PNG Files...")
 	for _, f0 := range(Png) {
@@ -56,6 +41,36 @@ func load() {
 	}
 }
 
+func HikoHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	http.ServeFile(w,r,INDEX)
+}
+
+func PidHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	// generate and cache player id
+}
+
+func TokHandler(w httpResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	time.Sleep(time.Second * 2)
+	w.Write([]byte("ok"))
+}
+
+func load() {
+	fmt.Println("reading file directories")
+	var err error
+	Png, err = ioutil.ReadDir(INPUT)
+	if err != nil {
+		fmt.Println(err)
+	}
+	Json, err = ioutil.ReadDir(OUTPUT)
+	if err != nil {
+		fmt.Println(err)
+	}
+	Lister()
+}
+
 func motd() {
 	fmt.Println("okaq hiko web started on localhost:8080")
 	fmt.Println(time.Now().String())
@@ -65,6 +80,8 @@ func main() {
 	motd()
 	load()
 	http.HandleFunc("/", HikoHandler)
+	http.HandleFunc("/a", PidHandler)
+	http.HandleFunc("/b", TokHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
