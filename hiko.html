@@ -55,15 +55,26 @@ var net = {
 
         // encode state as enum
         net.c = 0;
+
+        // tick count
+        net.d = 0;
     },
     "bling": function() {
         // start by getting file lists
         net.b.addEventListener("load", net.list);
         net.b.open("GET", net.a[1]);
         net.b.send();
+        // increment
+        net.d = net.d + 1;
     },
     "list": function(e) {
         console.log(e);
+        // cycle
+        if (net.d > 4) {
+            console.log("done. tick count: " + net.d);
+            return;
+        }
+        window.setTimeout(net.bling, 1000);
     }
 }
     // dom

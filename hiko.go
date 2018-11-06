@@ -51,7 +51,7 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
 	// generate and cache player id
 }
 
-func TokHandler(w httpResponseWriter, r *http.Request) {
+func TokHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	time.Sleep(time.Second * 2)
 	w.Write([]byte("ok"))
