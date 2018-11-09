@@ -46,6 +46,17 @@ var g = {
 var sce = {
     "board": function() {
         // monochrome grey scales
+        sce.a = [0,127,255];
+        // bkgd
+        sce.b = {};
+        sce.b.r = [1920,1080,0,0];
+        sce.b.c = dom.canvas(sce.b.r);
+        dom.add(sce.b.c);
+        sce.b.addEventListener("click", sce.click, false);
+        sce.b.d = sce.a[0];
+        sce.b.c.can.dataset.x = "bkgd_0";
+        // grid
+        sce.c = [];
     }
 }
 // render
