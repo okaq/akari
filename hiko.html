@@ -62,7 +62,21 @@ var sce = {
         // 16x16 pixel draw fill area
         // nx = 96, ny = 54, nt = 5184
         sce.c = [];
-
+        for (var i = 0; i < 5184; i++) {
+            var x0 = i % 96;
+            var y0 = (i / 96) >>> 0;
+            var k0 = "grid_" + x0 + "_" + y0;
+            c0 = {};
+            var x1 = (20 * x0) >>> 0;
+            var y1 = (20 * y0) >>> 0;
+            c0.r = [20,20,x1,y1];
+            c0.c = dom.canvas(c0.r);
+            c0.d = [sce.a[1],sce.a[6]];
+            sce.c[i] = c0;
+            dom.add(sce.c[i].c)
+            sce.c[i].c.can.addeventListener("click", sce.click, false);
+            sce.c[i].c.can.dataset.x = k0;
+        }
     }
 }
 // render
