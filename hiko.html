@@ -46,7 +46,8 @@ var g = {
 var sce = {
     "board": function() {
         // monochrome grey scales
-        sce.a = [0,127,255];
+        // sce.a = [0,127,255];
+        sce.a = [0,36,72,108,144,180,216,255];
         // bkgd
         sce.b = {};
         sce.b.r = [1920,1080,0,0];
@@ -56,7 +57,12 @@ var sce = {
         sce.b.d = sce.a[0];
         sce.b.c.can.dataset.x = "bkgd_0";
         // grid
+        // 20 x 20 pixel blocks
+        // 2px margine per side
+        // 16x16 pixel draw fill area
+        // nx = 96, ny = 54, nt = 5184
         sce.c = [];
+
     }
 }
 // render
