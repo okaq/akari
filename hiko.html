@@ -101,6 +101,7 @@ var ren = {
         ren.bkgd();
         ren.grid();
         // test gradient monochrome
+        window.setTimeout(ren.grad, 2500);
     },
     "bkgd": function() {
         sce.b.c.con.fillStyle = rgba.mono(sce.b.d);
@@ -112,6 +113,17 @@ var ren = {
             c0.c.con.fillStyle = rgba.mono(c0.d[1]);
             c0.c.con.fillRect(2,2,16,16);
         }
+    },
+    "grad": function() {
+        for (var i = 0; i < sce.c.length; i++) {
+            var c0 = sce.c[i].c;
+            var x0 = i % sce.a.length;
+            c0.con.fillStyle = rgba.mono(sce.a[x0]);
+            c0.con.fillRect(2,2,16,16);
+        }
+        // linear gradient looks good
+        // we can consider other exponential functions
+        // to allow more range in high low pass
     }
 }
 // xhr
