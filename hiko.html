@@ -30,7 +30,7 @@ var g = {
             console.log("start akari...");
 
             // subs
-            g.subs = [dom,net];
+            g.subs = [dom,net,sce];
             g.subs.forEach(function(el){el.init();});
 
             // wait and begin
@@ -40,22 +40,33 @@ var g = {
             net.bling();
 
             // visualize the board
+            ren.board();
         }
 }
 // scene
 var sce = {
+    "init": function() {
+        sce.board();
+    },
     "board": function() {
         // monochrome grey scales
         // sce.a = [0,127,255];
         sce.a = [0,36,72,108,144,180,216,255];
+
+        sce.bkgd();
+        sce.grid();
+    },
+    "bkgd": function() {
         // bkgd
         sce.b = {};
         sce.b.r = [1920,1080,0,0];
         sce.b.c = dom.canvas(sce.b.r);
         dom.add(sce.b.c);
-        sce.b.addEventListener("click", sce.click, false);
+        sce.b.c.can.addEventListener("click", sce.click, false);
         sce.b.d = sce.a[0];
         sce.b.c.can.dataset.x = "bkgd_0";
+    },
+    "grid": function() {
         // grid
         // 20 x 20 pixel blocks
         // 2px margine per side
@@ -74,15 +85,33 @@ var sce = {
             c0.d = [sce.a[1],sce.a[6]];
             sce.c[i] = c0;
             dom.add(sce.c[i].c)
-            sce.c[i].c.can.addeventListener("click", sce.click, false);
+            sce.c[i].c.can.addEventListener("click", sce.click, false);
             sce.c[i].c.can.dataset.x = k0;
         }
+    },
+    "click": function(e) {
+        console.log(e);
+        console.log(e.target.dataset.x);
     }
 }
 // render
 var ren = {
     "board": function() {
         // bkgd to fore
+        ren.bkgd();
+        ren.grid();
+        // test gradient monochrome
+    },
+    "bkgd": function() {
+        sce.b.c.con.fillStyle = rgba.mono(sce.b.d);
+        sce.b.c.con.fillRect(0,0,sce.b.c.can.width,sce.b.c.can.height);
+    },
+    "grid": function() {
+        for (var i = 0; i < sce.c.length; i++) {
+            var c0 = sce.c[i];
+            c0.c.con.fillStyle = rgba.mono(c0.d[1]);
+            c0.c.con.fillRect(2,2,16,16);
+        }
     }
 }
 // xhr
