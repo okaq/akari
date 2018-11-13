@@ -99,6 +99,11 @@ var sce = {
     "click": function(e) {
         console.log(e);
         console.log(e.target.dataset.x);
+        // mark and render
+        e.target.dataset.y = 0;
+        ren.square();
+        // increment turn clock
+        g.turn = g.turn + 1;
     }
 }
 // render
