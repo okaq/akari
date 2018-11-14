@@ -57,6 +57,15 @@ func TokHandler(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("ok"))
 }
 
+func StatHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	// online stats generation modalities
+	// calculate upon request
+	// running goroutine to calculate at timed interval
+	// double buffered book keeping, eventual consistant
+
+}
+
 func load() {
 	fmt.Println("reading file directories")
 	var err error
@@ -82,6 +91,7 @@ func main() {
 	http.HandleFunc("/", HikoHandler)
 	http.HandleFunc("/a", PidHandler)
 	http.HandleFunc("/b", TokHandler)
+	http.HandleFunc("/c", StatHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
