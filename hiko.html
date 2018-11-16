@@ -48,6 +48,12 @@ var g = {
             // index cardinality determines "go"
             // player one = evens, player two = odds
             // index into game state history lists
+        },
+        "txt": function() {
+            // random string list layout
+            // clear and text string test
+            ren.bkgd();
+            ren.white();
         }
 }
 // scene
@@ -136,6 +142,16 @@ var ren = {
         // linear gradient looks good
         // we can consider other exponential functions
         // to allow more range in high low pass
+
+        // return to game
+        window.setTimeout(g.txt, 2000);
+    },
+    "white": function() {
+        for (var i = 0; i < sce.c.length; i++) {
+            var c0 = sce.c[i];
+            c0.c.con.fillStyle = rgba.mono(255);
+            c0.c.con.fillRect(0,0,20,20);
+        }
     }
 }
 // xhr
