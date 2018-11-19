@@ -54,6 +54,10 @@ var g = {
             // clear and text string test
             ren.bkgd();
             ren.white();
+        },
+        "letter": function() {
+            // display letters in full 1024x1024 at 1fps
+            g.brim = ["O","K","A","Q"];
         }
 }
 // scene
@@ -186,6 +190,8 @@ var net = {
         // cycle
         if (net.d > 4) {
             console.log("done. tick count: " + net.d);
+            // start the letter test
+            window.setTimeout(g.letter, 1000);
             return;
         }
         window.setTimeout(net.bling, 1000);
