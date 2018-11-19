@@ -54,10 +54,16 @@ var g = {
             // clear and text string test
             ren.bkgd();
             ren.white();
+
+            sce.txt();
+            ren.square();
+
+            g.letter();
         },
         "letter": function() {
             // display letters in full 1024x1024 at 1fps
             g.brim = ["O","K","A","Q"];
+            // start loop
         }
 }
 // scene
@@ -80,7 +86,9 @@ var sce = {
         sce.b.c = dom.canvas(sce.b.r);
         dom.add(sce.b.c);
         sce.b.c.can.addEventListener("click", sce.click, false);
-        sce.b.d = sce.a[0];
+        // sce.b.d = sce.a[0];
+        var f0 = (Math.random() * sce.a.length) >>> 0;
+        sce.b.d = sce.a[f0];
         sce.b.c.can.dataset.x = "bkgd_0";
     },
     "grid": function() {
@@ -114,6 +122,20 @@ var sce = {
         ren.square();
         // increment turn clock
         g.turn = g.turn + 1;
+    },
+    "txt": function() {
+        // detach grid form DOM
+        for (var i = 0; i < sce.c.length; i++) {
+            dom.remove(sce.c[i].c);
+        }
+        // center square 1024x1024
+        sce.d = {};
+        sce.d.r = [1024,1024,448,28];
+        sce.d.c = dom.canvas(sce.d.r);
+        sce.d.d = rgba.rmon();
+        dom.add(sce.d.c);
+        sce.d.c.can.addEventListener("click", sce.click, false);
+        sce.d.c.can.dataset.x = "letter_1";
     }
 }
 // render
@@ -148,7 +170,7 @@ var ren = {
         // to allow more range in high low pass
 
         // return to game
-        window.setTimeout(g.txt, 2000);
+        // window.setTimeout(g.txt, 2000);
     },
     "white": function() {
         for (var i = 0; i < sce.c.length; i++) {
@@ -156,6 +178,10 @@ var ren = {
             c0.c.con.fillStyle = rgba.mono(255);
             c0.c.con.fillRect(0,0,20,20);
         }
+    },
+    "square": function() {
+        sce.d.c.con.fillStyle = sce.d.d;
+        sce.d.c.con.fillRect(0,0,sce.d.c.can.width,sce.d.c.can.height);
     }
 }
 // xhr
@@ -191,7 +217,7 @@ var net = {
         if (net.d > 4) {
             console.log("done. tick count: " + net.d);
             // start the letter test
-            window.setTimeout(g.letter, 1000);
+            window.setTimeout(g.txt, 1000);
             return;
         }
         window.setTimeout(net.bling, 1000);
