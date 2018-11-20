@@ -64,6 +64,17 @@ var g = {
             // display letters in full 1024x1024 at 1fps
             g.brim = ["O","K","A","Q"];
             // start loop
+            g.tick = 0;
+            g.id = window.setInterval(g.next, 2500);
+        },
+        "next": function() {
+            // render index letter
+            if (g.tick >= g.brim.length) {
+                window.clearInterval(g.id);
+                console.log("done. letters rendered");
+                // begin text layout blocks
+            }
+            g.tick = g.tick + 1;
         }
 }
 // scene
