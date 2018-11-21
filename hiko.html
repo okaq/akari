@@ -205,6 +205,14 @@ var ren = {
         // get bitmap glyph
         var t0 = g.brim[g.tick];
         console.log(t0);
+        var b0 = bmp.a[t0];
+        console.log(b0);
+        console.log("length: " + b0.length);
+        // clear bkgd
+        sce.d.c.con.fillStyle = rgba.mono(255);
+        sce.d.c.con.fillRect(0,0,sce.d.c.can.width,sce.d.c.can.height);
+        // set fill color
+        sce.d.c.con.fillStyle = rgba.mono(0);
     }
 }
 // xhr
