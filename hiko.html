@@ -206,13 +206,27 @@ var ren = {
         var t0 = g.brim[g.tick];
         console.log(t0);
         var b0 = bmp.a[t0];
-        console.log(b0);
+        // console.log(b0);
         console.log("length: " + b0.length);
         // clear bkgd
         sce.d.c.con.fillStyle = rgba.mono(255);
         sce.d.c.con.fillRect(0,0,sce.d.c.can.width,sce.d.c.can.height);
         // set fill color
         sce.d.c.con.fillStyle = rgba.mono(0);
+        // bitmap loop
+        for (var i = 0; i < 1024; i++) {
+            var b1 = b0[i];
+            if (b1 == 1) {
+                continue;
+            }
+            var x0 = i % 32;
+            var y0 = (i / 32) >>> 0;
+            var x1 = (x0 * 32) >>> 0;
+            var y1 = (y0 * 32) >>> 0;
+            sce.d.c.con.fillRect(x1,y1,32,32);
+        }
+        // bitmap 1 = white, bkgd
+        // 0 = black, fore glyph char
     }
 }
 // xhr
