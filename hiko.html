@@ -68,12 +68,16 @@ var g = {
             g.id = window.setInterval(g.next, 2500);
         },
         "next": function() {
-            // render index letter
+            // tick test
             if (g.tick >= g.brim.length) {
                 window.clearInterval(g.id);
                 console.log("done. letters rendered");
+                return;
                 // begin text layout blocks
             }
+            // render index letter
+            ren.next();
+            // advance
             g.tick = g.tick + 1;
         }
 }
@@ -196,6 +200,11 @@ var ren = {
     "square": function() {
         sce.d.c.con.fillStyle = sce.d.d;
         sce.d.c.con.fillRect(0,0,sce.d.c.can.width,sce.d.c.can.height);
+    },
+    "next": function() {
+        // get bitmap glyph
+        var t0 = g.brim[g.tick];
+        console.log(t0);
     }
 }
 // xhr
