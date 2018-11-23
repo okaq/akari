@@ -72,13 +72,18 @@ var g = {
             if (g.tick >= g.brim.length) {
                 window.clearInterval(g.id);
                 console.log("done. letters rendered");
-                return;
+                // return;
                 // begin text layout blocks
+                window.setTimeout(g.tess, 1000);
             }
             // render index letter
             ren.next();
             // advance
             g.tick = g.tick + 1;
+        },
+        "tess": function() {
+            // layout engine
+            sce.lay();
         }
 }
 // scene
@@ -154,6 +159,13 @@ var sce = {
         dom.add(sce.d.c);
         sce.d.c.can.addEventListener("click", sce.click, false);
         sce.d.c.can.dataset.x = "letter_1";
+    },
+    "lay": function() {
+        // a collection of intersecting rects
+        // at one glyph height
+        // width from 3-9 letters
+        sce.e = {};
+        sce.e.n = 64;
     }
 }
 // render
