@@ -84,6 +84,8 @@ var g = {
         "tess": function() {
             // layout engine
             sce.lay();
+            // ren.test();
+            // intersection calculator
         }
 }
 // scene
@@ -179,11 +181,21 @@ var sce = {
         }
         // canvas
         sce.e.c = [];
-        for (var i = 0; i < sce,e,n; i++) {
+        for (var i = 0; i < sce.e.n; i++) {
             sce.e.c[i] = dom.canvas(sce.e.r[i]);
             dom.add(sce.e.c[i]);
             sce.e.c[i].can.addEventListener("click", sce.click, false);
             sce.e.c[i].can.dataset.x = "lay_" + i;
+        }
+        // color data
+        sce.e.d = [];
+        for (var i = 0; i < sce.e.n; i++) {
+            sce.e.d[i] = [];
+            var w0 = (sce.e.r[i][0] / 32) >>> 0;
+            for (var j = 0; j < w0; j++) {
+                var c0 = rgba.rmon();
+                sce.e.d[i].push(c0)
+            }
         }
     }
 }
