@@ -166,6 +166,25 @@ var sce = {
         // width from 3-9 letters
         sce.e = {};
         sce.e.n = 64;
+        // rect
+        sce.e.r = [];
+        for (var i = 0; i < sce.e.n; i++) {
+            var w0 = ((Math.random() * 7) + 3) >>> 0;
+            // produces interval on [3,9]
+            var w1 = (w0 * 32) >>> 0;
+            var h0 = 32;
+            var x0 = ((1920 - w1) * Math.random()) >>> 0;
+            var y0 = ((1080 - 32) * Math.random()) >>> 0;
+            sce.e.r[i] = [w1,h0,x0,y0];;
+        }
+        // canvas
+        sce.e.c = [];
+        for (var i = 0; i < sce,e,n; i++) {
+            sce.e.c[i] = dom.canvas(sce.e.r[i]);
+            dom.add(sce.e.c[i]);
+            sce.e.c[i].can.addEventListener("click", sce.click, false);
+            sce.e.c[i].can.dataset.x = "lay_" + i;
+        }
     }
 }
 // render
