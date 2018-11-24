@@ -88,6 +88,8 @@ var g = {
             // ren.white();
             ren.lay();
             // intersection calculator
+            // using spacial indexing
+            sce.index();
         }
 }
 // scene
@@ -199,6 +201,18 @@ var sce = {
                 sce.e.d[i].push(c0)
             }
         }
+    },
+    "index": function() {
+        // square grid, 120px
+        sce.f = [];
+        var nx = (1920 / 120) >>> 0;
+        var ny = (1080 / 120) >>> 0;
+        var nt = (nx * ny) >>> 0;
+        console.log(nx,ny,nt);
+        // rect grid, 360 x 120
+        var nx1 = (1920 / 360) >>> 0;
+        var nt1 = (nx1, nt1);
+        console.log(nx1,ny,nt1);
     }
 }
 // render
