@@ -90,6 +90,16 @@ var g = {
             // intersection calculator
             // using spacial indexing
             sce.index();
+            window.setTimeout(g.squares, 2000);
+        },
+        "squares": function() {
+            ren.white2();
+            ren.squares();
+            window.setTimeout(g.rects, 2000);
+        },
+        "rects": function() {
+            ren.white2();
+            ren.rects();
         }
 }
 // scene
@@ -203,16 +213,44 @@ var sce = {
         }
     },
     "index": function() {
+        // detach center pane
+        dom.remove(sce.d.c);
+        // detach text rands
+        for (var i = 0; i < sce.e.c.length; i++) {
+            dom.remove(sce.e.c[i])
+        }
+        sce.squares();
+        sce.rects();
+    },
+    "squares": function() {
         // square grid, 120px
         sce.f = [];
         var nx = (1920 / 120) >>> 0;
         var ny = (1080 / 120) >>> 0;
         var nt = (nx * ny) >>> 0;
         console.log(nx,ny,nt);
+        for (var i = 0; i < nt; i++) {
+            var x0 = i % nx;
+            var y0 = (i / nx) >>> 0;
+            var x1 = (x0 * 120) >>> 0;
+            var y1 = (y0 * 120) >>> 0;
+            var r0 = [120,120,x1,y1];
+            sce.f[i] = r0;
+        }
         // rect grid, 360 x 120
+        sce.g = [];
         var nx1 = (1920 / 360) >>> 0;
-        var nt1 = (nx1, nt1);
-        console.log(nx1,ny,nt1);
+        var ny1 = (1080 / 120) >>> 0;
+        var nt1 = (nx1 * ny1) >>> 0;
+        console.log(nx1,ny1,nt1);
+        for (var i = 0; i < nt1; i++) {
+            var x0 = i % nx1;
+            var y0 = (i / nx1) >>> 0;
+            var x1 = (x0 * 360) >>> 0;
+            var y1 = (y0 * 120) >>> 0;
+            var r0 = [360,120,x1,y1];
+            sce.g[i] = r0;
+        }
     }
 }
 // render
@@ -255,6 +293,10 @@ var ren = {
             c0.c.con.fillStyle = rgba.mono(255);
             c0.c.con.fillRect(0,0,20,20);
         }
+    },
+    "white2": function() {
+        sce.b.c.con.fillStyle = rgba.mono(255);
+        sce.b.c.con.fillRect(0,0,sce.b.c.can.width,sce.b.c.can.height);
     },
     "square": function() {
         sce.d.c.con.fillStyle = sce.d.d;
@@ -299,6 +341,12 @@ var ren = {
                 c0.con.fillRect(x0,0,32,32);
             }
         }
+    },
+    "squares": function() {
+        // rand square grid test
+    },
+    "rects": function() {
+        // rand rect grid test
     }
 }
 // xhr
