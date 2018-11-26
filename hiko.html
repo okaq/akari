@@ -237,6 +237,8 @@ var sce = {
             var r0 = [120,120,x1,y1];
             sce.f[i] = r0;
         }
+    },
+    "rects": function() {
         // rect grid, 360 x 120
         sce.g = [];
         var nx1 = (1920 / 360) >>> 0;
@@ -344,6 +346,11 @@ var ren = {
     },
     "squares": function() {
         // rand square grid test
+        for (var i = 0; i < sce.f.length; i++) {
+            sce.b.c.con.fillStyle = rgba.rmon();
+            var r0 = sce.f[i];
+            sce.b.c.con.fillRect(r0[2], r0[3], r0[0], r0[1]);
+        }
     },
     "rects": function() {
         // rand rect grid test
