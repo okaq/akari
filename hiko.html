@@ -95,7 +95,7 @@ var g = {
         "squares": function() {
             ren.white2();
             ren.squares();
-            window.setTimeout(g.rects, 2000);
+            window.setTimeout(g.rects, 4000);
         },
         "rects": function() {
             ren.white2();
@@ -354,6 +354,11 @@ var ren = {
     },
     "rects": function() {
         // rand rect grid test
+        for (var i = 0; i < sce.g.length; i++) {
+            sce.b.c.con.fillStyle = rgba.rmon();
+            var r0 = sce.g[i];
+            sce.b.c.con.fillRect(r0[2], r0[3], r0[0], r0[1]);
+        }
     }
 }
 // xhr
