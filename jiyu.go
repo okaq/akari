@@ -19,6 +19,16 @@ func JiyuHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w,r,INDEX)
 }
 
+func PidHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	// generate and store key
+}
+
+func StatsHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	// atomic counter
+}
+
 func motd() {
 	fmt.Println("okaq jiyu on localhost:8080")
 	fmt.Println(time.Now().String())
@@ -26,7 +36,10 @@ func motd() {
 
 func main() {
 	motd()
+	// init cache
 	http.HandleFunc("/", JiyuHandler)
+	http.HandleFunc("/a", PidHandler)
+	http.HandleFunc("/s", StatsHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
