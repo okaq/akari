@@ -30,7 +30,7 @@ var g = {
             console.log("start akari...");
 
             // subs
-            g.subs = [dom,sce];
+            g.subs = [dom,sce,net];
             g.subs.forEach(function(el){el.init();});
 
             // wait and begin
@@ -48,6 +48,19 @@ var sce = {
         // moto e4 360 x 640
         sce.a = {};
         sce.r = [360,640,0,0];
+    }
+}
+// xhr
+var net = {
+    "init": function() {
+        // urls
+        nat.a = [];
+        // player id
+        net.a[0] = "http://localhost:8080/a";
+        // global stats
+        net.a[1] = "http://localhost:8080/s";
+
+        net.b = new XMLHttpRequest();
     }
 }
     // dom
