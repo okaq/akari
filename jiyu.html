@@ -38,6 +38,7 @@ var g = {
         },
         "start": function() {
             // net.bloc();
+            bmp.dragon();
         }
     }
 // scene
@@ -54,7 +55,7 @@ var sce = {
 var net = {
     "init": function() {
         // urls
-        nat.a = [];
+        net.a = [];
         // player id
         net.a[0] = "http://localhost:8080/a";
         // global stats
@@ -176,6 +177,17 @@ var net = {
             var b0 = base64DecToArr(s0);
             var b1 = bmp.exp(b0);
             return b1;
+        },
+        "dragon": function() {
+            // decode dragon
+            bmp.b = {};
+            var b0 = base64DecToArr(dragon);
+            bmp.b["dragon"] = bmp.exp(b0);
+            console.log("dragon logo decoded!");
+            var s0 = (bmp.b["dragon"].length);
+            var s1 = Math.sqrt(s0);
+            console.log("dragon size: " + s0 + " (" + s1 + "x" + s1 + ")");
+
         }
     }
     // gugi bitmap font
@@ -217,6 +229,8 @@ var net = {
     "Y": "/////////////////////////////////5/5//+P8f//h+H//8fh///Dw///48f//+GH///xj///8A////gf///4H////D////w////8P////D////w////8P////D////w////8P////n////////////////////////////8=",
     "Z": "/////////////////////////////////8AD//+AAf//gAH////D////w////4f///8P////D////h////w////8P///+H////j////w////4f///+P////D////g////4AB//+AAf////////////////////////////////8="
     }
+    // dragon
+    var dragon = "/////////////////////////////x////9P////Bf///wb///8/H///H4///h+H//4fx/v8H+f5/B///Pwf//44P///AD///8Af///+H////g////////////////////////////////////////////////////////////8=";
     // string view
     /*\
     |*|
