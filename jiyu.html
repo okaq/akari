@@ -41,6 +41,8 @@ var g = {
             bmp.dragon();
             sce.dragon();
             ren.dragon();
+
+            ren.resolution();
         }
     }
 // scene
@@ -50,7 +52,11 @@ var sce = {
         // window.screen object model
         // moto e4 360 x 640
         sce.a = {};
-        sce.r = [360,640,0,0];
+        sce.a.r = [360,640,0,0];
+        sce.a.c = dom.canvas(sce.a.r);
+        dom.add(sce.a.c);
+        sce.a.c.can.dataset.x = "resolution_1";
+        sce.a.c.can.addEventListener("click", sce.click, false);
     },
     "dragon": function() {
         sce.b = {};
@@ -80,6 +86,10 @@ var ren = {
             var y1 = (y0 * 32) >>> 0;
             sce.b.c.con.fillRect(x1,y1,32,32);
         }
+    },
+    "resolution": function() {
+        sce.a.c.con.fillStyle = rgba.mono(0);
+        sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
     }
 }
 // xhr
