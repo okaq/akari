@@ -39,6 +39,8 @@ var g = {
         "start": function() {
             // net.bloc();
             bmp.dragon();
+            sce.dragon();
+            ren.dragon();
         }
     }
 // scene
@@ -49,6 +51,35 @@ var sce = {
         // moto e4 360 x 640
         sce.a = {};
         sce.r = [360,640,0,0];
+    },
+    "dragon": function() {
+        sce.b = {};
+        sce.b.r = [1024,1024,896,56];
+        // bottom right corner
+        sce.b.c = dom.canvas(sce.b.r);
+        dom.add(sce.b.c);
+        sce.b.c.can.dataset.x = "dragon_1";
+        sce.b.c.can.addEventListener("click", sce.click, false);
+    },
+    "click": function(e) {
+        console.log(e);
+    }
+}
+// render
+var ren = {
+    "dragon": function() {
+        sce.b.c.con.fillStyle = rgba.mono(0);
+        var b0 = bmp.b["dragon"];
+        for (var i = 0; i < b0.length; i++) {
+            if (b0[i] == 0) {
+                continue;
+            }
+            var x0 = i % 32;
+            var x1 = (x0 * 32) >>> 0;
+            var y0 = (i / 32) >>> 0;
+            var y1 = (y0 * 32) >>> 0;
+            sce.b.c.con.fillRect(x1,y1,32,32);
+        }
     }
 }
 // xhr
