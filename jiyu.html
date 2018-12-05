@@ -37,6 +37,8 @@ var g = {
             window.setTimeout(g.start, 1000);
         },
         "start": function() {
+            // dispatch net id
+            net.id();
             // net.bloc();
             bmp.dragon();
             sce.dragon();
@@ -103,6 +105,14 @@ var net = {
         net.a[1] = "http://localhost:8080/s";
 
         net.b = new XMLHttpRequest();
+    },
+    "id": function() {
+        net.c = (Math.random() * Number.MAX_SAFE_INTEGER) >>> 0;
+        console.log("player id: " + net.c);
+        net.b.open(net.a[0]);
+        net.b.addEventListener("load", net.pid, false);
+        net.b.requestType = "json";
+        net.b.responseType = "json";
     }
 }
     // dom
