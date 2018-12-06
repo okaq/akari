@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"sync"
 	"time"
 )
 
@@ -17,8 +18,14 @@ const (
 
 var (
 	// Pid cache
-	C map[string]string
+	// C map[string]string
+	Store *Cache
 )
+
+type Cache struct {
+	C map[string]string
+	*sync.Mutex
+}
 
 func JiyuHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
@@ -50,9 +57,17 @@ func motd() {
 	fmt.Println(time.Now().String())
 }
 
+func data() {
+	Store = &Cache{}
+	Store.C = make(map[string]string)
+	Store.C["0"] = "app start"
+	fmt.Println(Store.C)
+}
+
 func main() {
 	motd()
 	// init cache
+	data()
 	http.HandleFunc("/", JiyuHandler)
 	http.HandleFunc("/a", PidHandler)
 	http.HandleFunc("/s", StatsHandler)
