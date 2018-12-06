@@ -5,6 +5,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"net/http"
 	"time"
@@ -12,6 +13,11 @@ import (
 
 const (
 	INDEX = "jiyu.html"
+)
+
+var (
+	// Pid cache
+	C map[string]string
 )
 
 func JiyuHandler(w http.ResponseWriter, r *http.Request) {
@@ -22,6 +28,16 @@ func JiyuHandler(w http.ResponseWriter, r *http.Request) {
 func PidHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	// generate and store key
+	j0 := struct {
+		Pid int64 `json:"Pid"`
+	} {
+		Pid: 0,
+	}
+	err := json.NewDecoder(r.Body).Decode(&j0)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Printf("Player id: %d\n", j0.Pid)
 }
 
 func StatsHandler(w http.ResponseWriter, r *http.Request) {
