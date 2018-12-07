@@ -57,6 +57,7 @@ var g = {
             j0["Height"] = s0.height;
             var j1 = JSON.stringify(j0);
             console.log(j1);
+            net.screen(j1);
         }
     }
 // scene
@@ -113,8 +114,10 @@ var net = {
         net.a = [];
         // player id
         net.a[0] = "http://localhost:8080/a";
+        // screen
+        net.a[1] = "http://localhost:8080/b";
         // global stats
-        net.a[1] = "http://localhost:8080/s";
+        net.a[2] = "http://localhost:8080/s";
 
         net.b = new XMLHttpRequest();
     },
@@ -133,7 +136,15 @@ var net = {
         // progress, error, abort
     },
     "pid": function(e) {
-
+        console.log(e);
+    },
+    "screen": function(j0) {
+        net.b = new XMLHttpRequest();
+        net.b.open(net.urls[1]);
+        net.b.addEventListener("load", net.pid, false);
+        net.b.requestType = "json";
+        net.b.responseType = "json";
+        net.b.send(j0);
     }
 }
     // dom
