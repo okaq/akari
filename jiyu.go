@@ -56,6 +56,12 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
 func ScreenHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	// get browser resolution
+	j0 := new(Screen)
+	err := json.NewDecoder(r.Body).Decode(&j0)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Printf("Browser width = %d. Height = %d.\n", j0.W, j0.H)
 }
 
 func StatsHandler(w http.ResponseWriter, r *http.Request) {

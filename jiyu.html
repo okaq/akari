@@ -140,7 +140,7 @@ var net = {
     },
     "screen": function(j0) {
         net.b = new XMLHttpRequest();
-        net.b.open(net.urls[1]);
+        net.b.open("POST", net.a[1]);
         net.b.addEventListener("load", net.pid, false);
         net.b.requestType = "json";
         net.b.responseType = "json";
