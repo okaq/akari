@@ -27,6 +27,12 @@ type Cache struct {
 	*sync.Mutex
 }
 
+type Screen struct {
+	// DOM window.screen details
+	W int64 `json:"Width"`
+	H int64 `json:"Height"`
+}
+
 func JiyuHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	http.ServeFile(w,r,INDEX)
