@@ -45,6 +45,18 @@ var g = {
             ren.dragon();
 
             ren.resolution();
+
+            // query
+            window.setTimeout(g.look, 1000);
+        },
+        "look": function() {
+            var s0 = window.screen;
+            console.log(s0);
+            var j0 = {};
+            j0["Width"] = s0.width;
+            j0["Height"] = s0.height;
+            var j1 = JSON.stringify(j0);
+            console.log(j1);
         }
     }
 // scene
