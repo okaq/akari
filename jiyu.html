@@ -58,6 +58,9 @@ var g = {
             var j1 = JSON.stringify(j0);
             console.log(j1);
             net.screen(j1);
+
+            // render text in resolution pane
+            ren.pole(j1);
         }
     }
 // scene
@@ -105,6 +108,16 @@ var ren = {
     "resolution": function() {
         sce.a.c.con.fillStyle = rgba.mono(0);
         sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+    },
+    "pole": function(j0) {
+        // format the text strings
+        // use text draw methods
+        // with margins between words and letters
+    },
+    "text": function(s0, r0) {
+        // draw word in rect
+        // we can utilize a single canvas
+        // or individual ones for each bitmap glyph
     }
 }
 // xhr
