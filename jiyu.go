@@ -53,6 +53,11 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("Player id: %d\n", j0.Pid)
 }
 
+func ScreenHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	// get browser resolution
+}
+
 func StatsHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	// atomic counter
@@ -76,6 +81,7 @@ func main() {
 	data()
 	http.HandleFunc("/", JiyuHandler)
 	http.HandleFunc("/a", PidHandler)
+	http.HandleFunc("/b", ScreenHandler)
 	http.HandleFunc("/s", StatsHandler)
 	http.ListenAndServe(":8080", nil)
 }
