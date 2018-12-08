@@ -31,6 +31,7 @@ type Screen struct {
 	// DOM window.screen details
 	W int64 `json:"Width"`
 	H int64 `json:"Height"`
+	Pid int64 `json:"Pid"`
 }
 
 func JiyuHandler(w http.ResponseWriter, r *http.Request) {
@@ -67,6 +68,11 @@ func ScreenHandler(w http.ResponseWriter, r *http.Request) {
 	// otherwise json.Marshal(Screen)
 	s0 := fmt.Sprintf("%d:%d", j0.W, j0.H)
 	// requires pid
+	// refactor to do everything in one call
+	// browser sends POST server side with screen resolution
+	// server responds with generated Pid
+	// start goroutine to store in cache
+	// or sync via channel running for loop reciever
 }
 
 func StatsHandler(w http.ResponseWriter, r *http.Request) {
