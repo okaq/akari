@@ -73,6 +73,7 @@ func ScreenHandler(w http.ResponseWriter, r *http.Request) {
 	// server responds with generated Pid
 	// start goroutine to store in cache
 	// or sync via channel running for loop reciever
+	fmt.Println(s0)
 }
 
 func StatsHandler(w http.ResponseWriter, r *http.Request) {

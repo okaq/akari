@@ -34,7 +34,8 @@ var g = {
             g.subs.forEach(function(el){el.init();});
 
             // wait and begin
-            window.setTimeout(g.start, 1000);
+            // window.setTimeout(g.start, 1000);
+            window.setTimeout(g.start3, 1000);
         },
         "start": function() {
             // dispatch net id
@@ -55,12 +56,30 @@ var g = {
             var j0 = {};
             j0["Width"] = s0.width;
             j0["Height"] = s0.height;
+            j0["Pid"] = net.c;
             var j1 = JSON.stringify(j0);
             console.log(j1);
             net.screen(j1);
 
             // render text in resolution pane
             ren.pole(j1);
+        },
+        "start2": function() {
+            // obtain screen resolution from window api
+            // write width x height to resolution pane
+            // write sending to server message
+            // upon net load, write pid to screen
+            // draw clickable dragon to begin game
+        },
+        "start3": function() {
+            // browser resolution
+            g.res = [];
+            g.res["Width"] = window.screen.width;
+            g.res["Height"] = window.screen.height;
+            // write to navi pane
+            // send json to net server
+            // write pid response to navi
+            
         }
     }
 // scene
