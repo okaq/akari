@@ -62,6 +62,11 @@ func ScreenHandler(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(err)
 	}
 	fmt.Printf("Browser width = %d. Height = %d.\n", j0.W, j0.H)
+	// store in cache
+	// simple string format "W:H"
+	// otherwise json.Marshal(Screen)
+	s0 := fmt.Sprintf("%d:%d", j0.W, j0.H)
+	// requires pid
 }
 
 func StatsHandler(w http.ResponseWriter, r *http.Request) {
