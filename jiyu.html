@@ -77,9 +77,20 @@ var g = {
             g.res["Width"] = window.screen.width;
             g.res["Height"] = window.screen.height;
             // write to navi pane
+            ren.resolution();
+            ren.text("ALL TOP HAT", [320,32,0,0]);
             // send json to net server
             // write pid response to navi
-            
+
+            // text format
+            // screen size
+            // 1920 x 1080
+            // player id
+            // 927401847 
+            // only requires first 8 digits of rng
+
+
+
         }
     }
 // scene
@@ -137,6 +148,27 @@ var ren = {
         // draw word in rect
         // we can utilize a single canvas
         // or individual ones for each bitmap glyph
+
+        // represent text spaces
+        // as rows, a grid of cells
+        // and we actually have 32 grids, each offset from
+        // origin by one pixel
+
+        // using navi pane
+        // 32px height
+        var s1 = s0.split("");
+        sce.a.c.con.fillStyle = rgba.mono(255);
+        // console.log(s0, s1);
+        for (var i = 0; i < s1.length; i++) {
+            if (s1[i] == " ") {
+                continue;
+            }
+            // console.log(s1[i]);
+            var b0 = bmp.a[s1[i]];
+            // console.log(s1[i], b0.length);
+            var x0 = ((32 * i) + r0[2]) >>> 0;
+            sce.a.c.con.fillRect(x0+2,r0[3]+2,28,28);
+        }
     }
 }
 // xhr
