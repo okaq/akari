@@ -167,7 +167,22 @@ var ren = {
             var b0 = bmp.a[s1[i]];
             // console.log(s1[i], b0.length);
             var x0 = ((32 * i) + r0[2]) >>> 0;
-            sce.a.c.con.fillRect(x0+2,r0[3]+2,28,28);
+            // sce.a.c.con.fillRect(x0+2,r0[3]+2,28,28);
+            var p0 = [x0,r0[3]];
+            ren.char(b0, p0);
+        }
+    },
+    "char": function(b0, p0) {
+        // style set in text
+        for (var i = 0; i < b0.length; i++) {
+            if (b0[i] == 1) {
+                continue;
+            }
+            var x0 = i % 32;
+            var y0 = (i / 32) >>> 0;
+            var x1 = (p0[0] + x0) >>> 0;
+            var y1 = (y0 + p0[1]) >>> 0;
+            sce.a.c.con.fillRect(x1,y1,1,1);
         }
     }
 }
