@@ -78,7 +78,14 @@ var g = {
             g.res["Height"] = window.screen.height;
             // write to navi pane
             ren.resolution();
-            ren.text("ALL TOP HAT", [320,32,0,0]);
+            // ren.text("ALL TOP HAT", [320,32,0,0]);
+            ren.text("VIEWPORT", [320,32,0,0]);
+            var s0 = "  " + g.res["Width"] + " PX";
+            ren.text(s0, [320,32,0,32]);
+            var s1 = "X " + g.res["Height"] + " PX";
+            ren.text(s1, [320,32,0,64]);
+            var s2 = "PLAYER";
+            ren.text(s2, [320,32,0,128]);
             // send json to net server
             // write pid response to navi
 
