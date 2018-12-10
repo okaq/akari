@@ -7,6 +7,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"math/rand"
 	"net/http"
 	"sync"
 	"time"
@@ -80,16 +81,32 @@ func ScreenHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	// parse req body json
 	j0 := new(Screen)
-	err := new json.NewDecoder(r.Body).Decode(&j0)
+	err := json.NewDecoder(r.Body).Decode(&j0)
 	if err != nil {
 		fmt.Println(err)
 	}
 	fmt.Printf("Browser screen resolution: %d x %d.\n", j0.W, j0.H)
 	// generate player id
 	// timestamp
-	time.Now().UnixNano()
+	t0 := time.Now().UnixNano()
 	// random int32
-	
+	n0 := rand.New(rand.NewSource(t0))
+	n1 := n0.Uint32()
+	p0 := fmt.Sprintf("%d:%d", n1, t0)
+	fmt.Printf("Player id: %s.\n", p0)
+	// cache
+	// send pid response
+	j1 := struct {
+		Pid string `json:"Pid"`
+	} {
+		Pid: p0,
+	}
+	j2, err := json.Marshal(j1)
+	if err != nil {
+		fmt.Println(err)
+	}
+	w.Header().Set("Content-type", "application/json")
+	w.Write(j2)
 }
 
 func StatsHandler(w http.ResponseWriter, r *http.Request) {
