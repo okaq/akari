@@ -103,6 +103,17 @@ var g = {
             // memory chk
             // 8GB free
 
+        },
+        "start4": function() {
+            var s0 = net.p["Pid"];
+            var s1 = s0.split(":");
+            var s2 = "";
+            if (s1[0].length < 9) {
+                s2 = s1[0];
+            } else {
+                s2 = s1[0].slice(0,9);
+            }
+            ren.text(s2, [320,32,0,160]);
         }
     }
 // scene
@@ -249,6 +260,8 @@ var net = {
     },
     "pid2": function(e) {
         console.log(e);
+        net.p = JSON.parse(e.target.response);
+        g.start4();
     }
 }
     // dom
