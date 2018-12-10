@@ -25,7 +25,7 @@ var (
 
 type Cache struct {
 	C map[string]string
-	*sync.Mutex
+	sync.Mutex
 }
 
 type Screen struct {
@@ -95,6 +95,11 @@ func ScreenHandler(w http.ResponseWriter, r *http.Request) {
 	p0 := fmt.Sprintf("%d:%d", n1, t0)
 	fmt.Printf("Player id: %s.\n", p0)
 	// cache
+	s0 := fmt.Sprintf("%dX%d", j0.W, j0.H)
+	Store.Lock()
+	defer Store.Unlock()
+	Store.C[p0] = s0
+	fmt.Println(Store.C)
 	// send pid response
 	j1 := struct {
 		Pid string `json:"Pid"`
@@ -148,5 +153,12 @@ func main() {
 // upload user generated and curate
 // serve one at a time to client
 // query answer on server
+
+// hardcode paths to domain host
+// e.g. https://www.okaq.com/s
+
+// update caching policy
+// browser should always get freshest
+// game version and state data
 
 
