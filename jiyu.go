@@ -54,7 +54,7 @@ func PidHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Printf("Player id: %d\n", j0.Pid)
 }
 
-func ScreenHandler(w http.ResponseWriter, r *http.Request) {
+func ScreenHandler1(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	// get browser resolution
 	j0 := new(Screen)
@@ -74,6 +74,22 @@ func ScreenHandler(w http.ResponseWriter, r *http.Request) {
 	// start goroutine to store in cache
 	// or sync via channel running for loop reciever
 	fmt.Println(s0)
+}
+
+func ScreenHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	// parse req body json
+	j0 := new(Screen)
+	err := new json.NewDecoder(r.Body).Decode(&j0)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Printf("Browser screen resolution: %d x %d.\n", j0.W, j0.H)
+	// generate player id
+	// timestamp
+	time.Now().UnixNano()
+	// random int32
+	
 }
 
 func StatsHandler(w http.ResponseWriter, r *http.Request) {
