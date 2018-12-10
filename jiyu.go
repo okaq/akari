@@ -117,6 +117,15 @@ func ScreenHandler(w http.ResponseWriter, r *http.Request) {
 func StatsHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	// atomic counter
+	// return cached results
+	Store.Lock()
+	defer Store.Unlock()
+	j0, err := json.Marshal(Store.C)
+	if err != nil {
+		fmt.Println(err)
+	}
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(j0)
 }
 
 func motd() {
