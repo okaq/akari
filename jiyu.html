@@ -73,7 +73,7 @@ var g = {
         },
         "start3": function() {
             // browser resolution
-            g.res = [];
+            g.res = {};
             g.res["Width"] = window.screen.width;
             g.res["Height"] = window.screen.height;
             // write to navi pane
@@ -87,6 +87,7 @@ var g = {
             var s2 = "PLAYER";
             ren.text(s2, [320,32,0,128]);
             // send json to net server
+            net.screen2();
             // write pid response to navi
 
             // text format
@@ -96,7 +97,11 @@ var g = {
             // 927401847 
             // only requires first 8 digits of rng
 
-
+            // optional
+            // net conn
+            // estabished / error
+            // memory chk
+            // 8GB free
 
         }
     }
@@ -231,6 +236,19 @@ var net = {
         net.b.requestType = "json";
         net.b.responseType = "json";
         net.b.send(j0);
+    },
+    "screen2": function() {
+        // send resolution data
+        net.b = new XMLHttpRequest();
+        net.b.open("POST", net.a[1]);
+        net.b.addEventListener("load", net.pid2, false);
+        net.b.requestType = "json";
+        net.b.responsetype = "json";
+        var j0 = JSON.stringify(g.res);
+        net.b.send(j0);
+    },
+    "pid2": function(e) {
+        console.log(e);
     }
 }
     // dom
