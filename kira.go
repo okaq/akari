@@ -19,6 +19,13 @@ func KiraHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w,r,INDEX)
 }
 
+func meta() {
+	// load persistant log file
+	// unmarshal to local object
+	// launch goroutine to update
+	// marshal json and write to new log
+}
+
 func motd() {
 	t0 := time.Now()
 	fmt.Println("okaq web serve on localhost:8080")
@@ -28,11 +35,15 @@ func motd() {
 
 func main() {
 	motd()
+	meta()
 	http.HandleFunc("/", KiraHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
 // single data dir
 // bat.png, bat.json, data.js
+
+// persistent log
+// write json metadata to filesystem
 
 
