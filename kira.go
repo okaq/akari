@@ -27,6 +27,15 @@ func KiraHandler(w http.ResponseWriter, r *http.Request) {
 	http.ServeFile(w,r,INDEX)
 }
 
+func PathsHandler(w http.ResponseWriter, r *http.Request) {
+	// image files paths json
+	// embed data on INDEX first call
+	// perhaps in html template json
+	// or inline uri data
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(J)
+}
+
 func files() {
 	// generate list of file paths
 	// sort in lexicographic order
@@ -69,6 +78,7 @@ func main() {
 	meta()
 	files()
 	http.HandleFunc("/", KiraHandler)
+	http.HandleFunc("/a", PathsHandler)
 	http.ListenAndServe(":8080", nil)
 }
 
