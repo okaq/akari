@@ -12,6 +12,7 @@ import (
 
 const (
 	INDEX = "kira.html"
+	DATA = "kirad/"
 )
 
 func KiraHandler(w http.ResponseWriter, r *http.Request) {
