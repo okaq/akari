@@ -40,12 +40,49 @@ var g = {
         "start": function() {
             // dispatch net file list
             net.list();
+        },
+        "pics": function() {
+            ren.black();
+            // fetch and render each image for sampling
+            for (var i = 0; i < 1; i++) {
+                var p0 = net.c[i];
+                console.log(p0);
+                var p1 = new Image();
+                // can add additional parameters to prototype
+                p1.a = "data";
+                p1.addEventListener("load", sce.pic, false);
+                p1.src = p0;
+            }
         }
 }
 // scene
 var sce = {
     "init": function() {
         sce.a = {};
+        sce.a.r = [1920,1080,0,0];
+        sce.a.c = dom.canvas(sce.a.r);
+        dom.add(sce.a.c);
+    },
+    "pic": function(e) {
+        sce.b = e.target;
+        console.log(sce.b);
+        // target is null?
+        // console.log(e.path[0]);
+        ren.img(sce.b);
+        // store event target in variable immediately
+        // after it is accessed it may revert to null
+    }
+}
+// render
+var ren = {
+    "black": function() {
+        sce.a.c.con.fillStyle = rgba.mono(0);
+        sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+    },
+    "img": function(p0) {
+        // var b0 = URL.createObjectURL(p0);
+        // console.log(b0);
+        sce.a.c.con.drawImage(p0,0,0);
     }
 }
 // xhr
@@ -66,7 +103,7 @@ var net = {
         net.c = e.target.response;
         // array object, no need to call JSON.parse
         console.log(net.c);
-        // g.pics();
+        g.pics();
     }
 }
     // dom
