@@ -56,6 +56,17 @@ var net = {
     },
     "list": function() {
         net.b = new XMLHttpRequest();
+        net.b.open("GET", net.a[0]);
+        net.b.responseType = "json";
+        net.b.addEventListener("load", net.files, false);
+        net.b.send();
+    },
+    "files": function(e) {
+        console.log(e);
+        net.c = e.target.response;
+        // array object, no need to call JSON.parse
+        console.log(net.c);
+        // g.pics();
     }
 }
     // dom
