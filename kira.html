@@ -53,15 +53,41 @@ var g = {
                 p1.addEventListener("load", sce.pic, false);
                 p1.src = p0;
             }
+            // loop over images
+            // get pixel data
+            // sample 32x32 blocks
+        },
+        "pics2": function() {
+            // clear canvases
+            ren.clear();
+            // loop
+            g.tick = 0;
+            g.id = window.setInterval(g.pics3, 2000);
+        },
+        "pics3": function() {
+            if (g.tick >= net.c.length) {
+                console.log("image load done");
+                window.clearInterval(g.id);
+            }
+            // path 
+            var p0 = net.c[g.tick];
+            console.log(p0);
+            g.tick = g.tick + 1;
         }
 }
 // scene
 var sce = {
     "init": function() {
+        // bkgd
         sce.a = {};
         sce.a.r = [1920,1080,0,0];
         sce.a.c = dom.canvas(sce.a.r);
         dom.add(sce.a.c);
+        // image
+        sce.b = {};
+        sce.b.r = [1024,1024,448,28];
+        sce.b.c = dom.canvas(sce.b.r);
+        dom.add(sce.b.c);
     },
     "pic": function(e) {
         sce.b = e.target;
@@ -83,6 +109,12 @@ var ren = {
         // var b0 = URL.createObjectURL(p0);
         // console.log(b0);
         sce.a.c.con.drawImage(p0,0,0);
+    },
+    "clear": function() {
+        sce.a.c.con.fillStyle = rgba.mono(0);
+        sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+        sce.b.c.con.fillStyle = rgba.mono(255);
+        sce.b.c.con.fillRect(0,0,sce.b.c.can.width,sce.b.c.can.height);
     }
 }
 // xhr
@@ -103,7 +135,8 @@ var net = {
         net.c = e.target.response;
         // array object, no need to call JSON.parse
         console.log(net.c);
-        g.pics();
+        // g.pics();
+        g.pics2();
     }
 }
     // dom
