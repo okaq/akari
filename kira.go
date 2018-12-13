@@ -32,8 +32,14 @@ func PathsHandler(w http.ResponseWriter, r *http.Request) {
 	// embed data on INDEX first call
 	// perhaps in html template json
 	// or inline uri data
+	fmt.Println(r)
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(J)
+}
+
+func FilesHandler(w http.ResponseWriter, r *http.Request) {
+	fmt.Println(r)
+	// serve by file path
 }
 
 func files() {
@@ -79,6 +85,10 @@ func main() {
 	files()
 	http.HandleFunc("/", KiraHandler)
 	http.HandleFunc("/a", PathsHandler)
+	http.HandleFunc("/b", FilesHandler)
+	// static server
+	fs := http.FileServer(http.Dir(DATA))
+	http.Handle("/kirad/", http.StripPrefix("/kirad/", fs))
 	http.ListenAndServe(":8080", nil)
 }
 
