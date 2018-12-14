@@ -60,6 +60,7 @@ var g = {
         "pics2": function() {
             // clear canvases
             ren.clear();
+            ren.wipe();
             // loop
             g.tick = 0;
             g.p = [];
@@ -108,9 +109,15 @@ var sce = {
         dom.add(sce.a.c);
         // image
         sce.b = {};
-        sce.b.r = [1024,1024,448,28];
+        // sce.b.r = [1024,1024,448,28];
+        sce.b.r = [1024,1024,448,36];
         sce.b.c = dom.canvas(sce.b.r);
         dom.add(sce.b.c);
+        // text
+        sce.c = {};
+        sce.c.r = [1920,32,0,0];
+        sce.c.c = dom.canvas(sce.c.r);
+        dom.add(sce.c.c);
     },
     "pic": function(e) {
         sce.b = e.target;
@@ -142,6 +149,10 @@ var ren = {
     "bmp": function() {
         ren.clear();
         sce.b.c.con.drawImage(g.p[g.tick], 0, 0);
+    },
+    "wipe": function() {
+        sce.c.c.con.fillStyle = rgba.mono(0);
+        sce.c.c.con.fillRect(0,0,sce.c.c.can.width,sce.c.c.can.height);     
     }
 }
 // xhr
