@@ -76,12 +76,15 @@ var g = {
             // path 
             var p0 = net.c[g.tick];
             console.log(p0);
+            var p1 = p0.split("/");
+            console.log(p1[1]);
             // fetch
             var p1 = new Image();
             var f0 = function(e) {
                 g.p.push(p1);
                 // render
                 ren.bmp();
+                ren.text(p1[1]);
                 // update
                 g.tick = g.tick + 1;
                 window.setTimeout(g.pics3, 2000);
@@ -153,6 +156,22 @@ var ren = {
     "wipe": function() {
         sce.c.c.con.fillStyle = rgba.mono(0);
         sce.c.c.con.fillRect(0,0,sce.c.c.can.width,sce.c.c.can.height);     
+    },
+    "text": function(p0) {
+        var p1 = p0.toUpperCase();
+        for (var i = 0; i < p1.length; i++) {
+            var p2 = p1[i];
+            var b0 = bmp.a[p2];
+            if (b0 == null) {
+                continue;
+            }
+            var x0 = (32 * i) >>> 0;
+            var y0 = 0;
+            ren.glyph(b0, x0, y0);
+        }
+    },
+    "glyph": function(b0, x0, y0) {
+        
     }
 }
 // xhr
