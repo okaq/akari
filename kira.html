@@ -76,15 +76,17 @@ var g = {
             // path 
             var p0 = net.c[g.tick];
             console.log(p0);
-            var p1 = p0.split("/");
-            console.log(p1[1]);
+            var p2 = p0.split("/");
+            console.log(p2[1]);
             // fetch
             var p1 = new Image();
             var f0 = function(e) {
                 g.p.push(p1);
                 // render
+                ren.clear();
                 ren.bmp();
-                ren.text(p1[1]);
+                ren.wipe();
+                ren.text(p2[1]);
                 // update
                 g.tick = g.tick + 1;
                 window.setTimeout(g.pics3, 2000);
@@ -158,6 +160,7 @@ var ren = {
         sce.c.c.con.fillRect(0,0,sce.c.c.can.width,sce.c.c.can.height);     
     },
     "text": function(p0) {
+        sce.c.c.con.fillStyle = rgba.mono(255);
         var p1 = p0.toUpperCase();
         for (var i = 0; i < p1.length; i++) {
             var p2 = p1[i];
@@ -171,7 +174,16 @@ var ren = {
         }
     },
     "glyph": function(b0, x0, y0) {
-        
+        for (var i = 0; i < b0.length; i++) {
+            if (b0[i] == 1) {
+                continue;
+            }
+            var x1 = i % 32;
+            var y1 = (i / 32) >>> 0;
+            var x2 = (x0 + x1) >>> 0;
+            var y2 = (y0 + y1) >>> 0;
+            sce.c.c.con.fillRect(x2,y2,1,1);
+        }
     }
 }
 // xhr
