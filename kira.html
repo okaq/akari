@@ -63,12 +63,14 @@ var g = {
             // loop
             g.tick = 0;
             g.p = [];
-            g.id = window.setInterval(g.pics3, 2000);
+            // g.id = window.setInterval(g.pics3, 2000);
+            window.setTimeout(g.pics3, 2000);
         },
         "pics3": function() {
             if (g.tick >= net.c.length) {
                 console.log("image load done");
                 window.clearInterval(g.id);
+                return;
             }
             // path 
             var p0 = net.c[g.tick];
@@ -77,11 +79,17 @@ var g = {
             var p1 = new Image();
             var f0 = function(e) {
                 g.p.push(p1);
+                // render
+                ren.bmp();
+                // update
+                g.tick = g.tick + 1;
+                window.setTimeout(g.pics3, 2000);
+                // sample
             };
             p1.addEventListener("load", f0, false);
             p1.src = p0;
 
-            g.tick = g.tick + 1;
+            // g.tick = g.tick + 1;
 
             // this is how we run into async issues
             // loop updates on interval
@@ -130,6 +138,10 @@ var ren = {
         sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
         sce.b.c.con.fillStyle = rgba.mono(255);
         sce.b.c.con.fillRect(0,0,sce.b.c.can.width,sce.b.c.can.height);
+    },
+    "bmp": function() {
+        ren.clear();
+        sce.b.c.con.drawImage(g.p[g.tick], 0, 0);
     }
 }
 // xhr
