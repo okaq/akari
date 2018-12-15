@@ -284,6 +284,9 @@ var net = {
         console.log(net.d);
         // loop
         var t0 = 0;
+        var f1 = function(e) {
+            console.log(e.target.response);
+        }
         var f0 = function() {
             if (t0 >= net.d.length) {
                 window.clearInterval(net.e);
@@ -294,6 +297,14 @@ var net = {
             var d0 = net.d[t0];
             var d1 = Uint8Array.from(d0);
             console.log(d1, d1.length);
+            // xhr
+            var x0 = new XMLHttpRequest();
+            x0.open("POST", net.a[1]);
+            x0.requestType = "arraybuffer";
+            x0.responseType = "text";
+            x0.addEventListener("load", f1);
+            x0.send(d1);
+
             t0 = t0 + 1;
         }
         net.e = window.setInterval(f0, 2000);

@@ -4,6 +4,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
@@ -40,6 +41,16 @@ func PathsHandler(w http.ResponseWriter, r *http.Request) {
 func FilesHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(r)
 	// serve by file path
+	// array buffer data
+	// use atomic counter to index
+	// b0 := bytes.NewBuffer(r.Body)
+	b0 := new(bytes.Buffer)
+	b0.ReadFrom(r.Body)
+	fmt.Println(b0.Bytes())
+	// json marshal
+	s0 := fmt.Sprintf("recieved %d bytes ok", b0.Len())
+	b1 := []byte(s0)
+	w.Write(b1)
 }
 
 func files() {
