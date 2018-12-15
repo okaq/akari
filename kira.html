@@ -63,7 +63,9 @@ var g = {
             ren.wipe();
             // loop
             g.tick = 0;
-            g.p = [];
+            g.p = []; // images
+            g.s = []; // sample data
+            g.t = []; // threshold data (32x32)
             // g.id = window.setInterval(g.pics3, 2000);
             window.setTimeout(g.pics3, 2000);
         },
@@ -89,8 +91,33 @@ var g = {
                 ren.text(p2[1]);
                 // update
                 g.tick = g.tick + 1;
-                window.setTimeout(g.pics3, 2000);
+                window.setTimeout(g.pics3, 5000);
                 // sample
+                var p3 = sce.c.c.con.getImageData(0,0,sce.c.c.can.width,sce.c.c.can.height);
+                var p4 = p3.data;
+                g.s.push(p4);
+                // threshold
+                for (var y = 0; y < 32; y++) {
+                    for (var x = 0; x < 32; x++) {
+                        // loop over pixel blocks
+                        var c0 = [0,0];
+                        // count [black,white]
+                        var i0 = ((x * 32 * 4) + (y * 32 * 1024 * 4)) >>> 0;
+                        // block index into pixel data
+                        for (var i = 0; i < 1024; i++) {
+                            // for monochrome bitmaps
+                            // only one pixel sample is required
+                            // but threshold sampling is ideal
+                            // and for rgba values, create palette bins
+
+                        }
+                    }
+                }
+
+                // better coordination between server and browser
+                // treat it as a live running game
+                // pre allocate players
+                // and setup everything required for state
             };
             p1.addEventListener("load", f0, false);
             p1.src = p0;
