@@ -74,6 +74,7 @@ var g = {
                 console.log("image load done");
                 window.clearInterval(g.id);
                 // process and send to server
+                net.pill();
                 // better sync wait group determination needed
                 return;
             }
@@ -261,6 +262,25 @@ var net = {
         console.log(net.c);
         // g.pics();
         g.pics2();
+    },
+    "pill": function() {
+        // pack g.t
+        // post to server
+        net.d = [];
+        for (var i = 0; i < g.t.length; i++) {
+            var b0 = g.t[i];
+            net.d[i] = [];
+            // 1024 / 8 = 128
+            for (var j = 0; j < 128; j++) {
+                var j0 = (j * 8) >>> 0;
+                var j1 = (j0 + 8) >>> 0;
+                var b1 = b0.slice(j0, j1);
+                var b2 = b1.join('');
+                var b3 = parseInt(b2, 2);
+                net.d[i][j] = b3;
+            }
+        }
+        console.log(net.d);
     }
 }
     // dom
