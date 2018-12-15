@@ -73,6 +73,8 @@ var g = {
             if (g.tick >= net.c.length) {
                 console.log("image load done");
                 window.clearInterval(g.id);
+                // process and send to server
+                // better sync wait group determination needed
                 return;
             }
             // path 
@@ -89,30 +91,56 @@ var g = {
                 ren.bmp();
                 ren.wipe();
                 ren.text(p2[1]);
-                // update
-                g.tick = g.tick + 1;
-                window.setTimeout(g.pics3, 5000);
                 // sample
-                var p3 = sce.c.c.con.getImageData(0,0,sce.c.c.can.width,sce.c.c.can.height);
+                var p3 = sce.b.c.con.getImageData(0,0,sce.b.c.can.width,sce.b.c.can.height);
                 var p4 = p3.data;
+                // console.log(p3,p4.length);
                 g.s.push(p4);
                 // threshold
+                var t0 = [];  
+                // loop over pixel blocks
                 for (var y = 0; y < 32; y++) {
                     for (var x = 0; x < 32; x++) {
-                        // loop over pixel blocks
-                        var c0 = [0,0];
-                        // count [black,white]
                         var i0 = ((x * 32 * 4) + (y * 32 * 1024 * 4)) >>> 0;
                         // block index into pixel data
+                        // count [black,white]
+                        var c0 = [0,0];
                         for (var i = 0; i < 1024; i++) {
                             // for monochrome bitmaps
                             // only one pixel sample is required
                             // but threshold sampling is ideal
                             // and for rgba values, create palette bins
-
+                            
+                            // inner index
+                            var x0 = i % 32;
+                            var y0 = (i / 32) >>> 0;
+                            var x1 = (x0 * 4) >>> 0;
+                            var y1 = (y0 * 4 * 1024) >>> 0;
+                            var i1 = (i0 + x1 + y1) >>> 0;
+                            // just sample red channel
+                            var r0 = p4[i1];
+                            if (r0 == 0) {
+                                c0[0] = c0[0] + 1;
+                            } else {
+                                c0[1] = c0[1] + 1;
+                            }
                         }
+                        // determine
+                        var c1 = 1;
+                        if (c0[0] >= c0[1]) {
+                            c1 = 0;
+                        }
+                        t0.push(c1);
+                        // non threshold determination, single pixel sample
+                        // t0.push(p4[i0]);
                     }
                 }
+                g.t.push(t0);
+                console.log(t0);
+                
+                // update
+                g.tick = g.tick + 1;
+                window.setTimeout(g.pics3, 5000);
 
                 // better coordination between server and browser
                 // treat it as a live running game
