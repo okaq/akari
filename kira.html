@@ -247,6 +247,7 @@ var net = {
     "init": function() {
         net.a = [];
         net.a[0] = "http://localhost:8080/a";
+        net.a[1] = "http://localhost:8080/b";
     },
     "list": function() {
         net.b = new XMLHttpRequest();
@@ -281,6 +282,21 @@ var net = {
             }
         }
         console.log(net.d);
+        // loop
+        var t0 = 0;
+        var f0 = function() {
+            if (t0 >= net.d.length) {
+                window.clearInterval(net.e);
+                console.log("upload done.");
+                return;
+            }
+            // make array buffer
+            var d0 = net.d[t0];
+            var d1 = Uint8Array.from(d0);
+            console.log(d1, d1.length);
+            t0 = t0 + 1;
+        }
+        net.e = window.setInterval(f0, 2000);
     }
 }
     // dom
