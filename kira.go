@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"net/http"
+	"sync/atomic"
 	"time"
 )
 
@@ -19,8 +20,15 @@ const (
 )
 
 var (
+	// file paths
 	P []string
+	// json array of file paths
 	J []byte
+	// base64 bitmap data encoding
+	B []string
+	// final json file
+	D []byte
+	C uint64
 )
 
 func KiraHandler(w http.ResponseWriter, r *http.Request) {
@@ -49,6 +57,24 @@ func FilesHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(b0.Bytes())
 	// json marshal
 	s0 := fmt.Sprintf("recieved %d bytes ok", b0.Len())
+	b2, err := json.Marshal(b0.Bytes())
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(string(b2))
+	// increment
+	i0 := atomic.LoadUint64(&C)
+	fmt.Printf("Current file at index %d: %s\n", i0, P[i0])
+	// set data
+	B[i0] = string(b2)
+	atomic.AddUint64(&C, 1)
+	// when counter reaches len(P) 
+	// stitch and write to disk
+	n0 := uint64(len(P) - 1)
+	if i0 >= n0 {
+		fmt.Println(B)
+		// done
+	}
 	b1 := []byte(s0)
 	w.Write(b1)
 }
@@ -74,6 +100,7 @@ func files() {
 		fmt.Println(err2)
 	}
 	fmt.Println(string(J))
+	B = make([]string, len(f0))
 }
 
 func meta() {
