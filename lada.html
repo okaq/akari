@@ -45,6 +45,23 @@ var g = {
 
             bmp.wands();
             // wands decode time = 10ms ;)
+            // start loop
+            // requires key list to iterate
+            g.tick = 0; 
+            g.id = window.setInterval(g.frame, 2000);
+        },
+        "frame": function() {
+            if (g.tick >= bmp.d.length) {
+                console.log("anim done");
+                window.clearInterval(g.id);
+                return;
+            }
+            var k0 = bmp.d[g.tick];
+            var b0 = bmp.c[k0];
+            ren.clear();
+            ren.bmp(b0);
+            console.log("rendered bmp: " + k0);
+            g.tick = g.tick + 1;
         }
 }
 // scene
@@ -61,6 +78,10 @@ var sce = {
         sce.b.r = [1024,1024,448,28];
         sce.b.c = dom.canvas(sce.b.r);
         dom.add(sce.b.c);
+
+        // full scene
+        // layout random 32x32 pixel bmps
+        // or at different render scales up to 1024
     }
 }
 // render
@@ -213,12 +234,14 @@ var ren = {
         "wands": function() {
             // decode wands, generate stats
             bmp.c = {};
+            bmp.d = [];
             var t0 = window.performance.now();
             for (var w in wands) {
                 var w0 = wands[w];
                 var w1 = base64DecToArr(w0);
                 var w2 = bmp.exp(w1);
                 bmp.c[w] = w2;
+                bmp.d.push(w);
             }
             var t1 = window.performance.now() - t0;
             console.log("wands decode time: " + t1);
