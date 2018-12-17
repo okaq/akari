@@ -10,6 +10,7 @@ import (
 	"io/ioutil"
 	"math/rand"
 	"net/http"
+	"strings"
 	"sync/atomic"
 	"time"
 )
@@ -74,6 +75,25 @@ func FilesHandler(w http.ResponseWriter, r *http.Request) {
 	if i0 >= n0 {
 		fmt.Println(B)
 		// done
+		// json string
+		// file path format: kirad/wand_1.png
+		// get prefix for class name
+		s2 := strings.Split(P[0], "/")
+		s3 := strings.Split(s2[1], "_")
+		s4 := fmt.Sprintf("%ss", s3[0])
+		s5 := fmt.Sprintf("var %s = {\n", s4)
+		s1 := new(bytes.Buffer)
+		s1.WriteString(s5)
+		for i, p0 := range P {
+			s6 := strings.Split(p0, "/")
+			s7 := strings.Split(s6[1], ".")
+			s8 := fmt.Sprintf("\"%s\":%s,\n",s7[0],B[i])
+			s1.WriteString(s8)
+		}
+		s10 := fmt.Sprintf("}\n\n")
+		s1.WriteString(s10)
+		s9 := fmt.Sprintf("%s.json", s4)
+		ioutil.WriteFile(s9,s1.Bytes(),0666)
 	}
 	b1 := []byte(s0)
 	w.Write(b1)
