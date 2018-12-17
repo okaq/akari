@@ -156,4 +156,11 @@ func main() {
 // persistent log
 // write json metadata to filesystem
 
+// test wands.json output
+// 1868 bytes for 10 bitmaps (1024x1024)
+// versus 300kB for 10 PNGs
+
+// write json output to dedicated directory
+// cache copies on github (no ignore)
+
 
