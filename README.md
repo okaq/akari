@@ -19,4 +19,6 @@ kirap/ - previous PNGs
 
 lada.go - bitmap json decode and render test
 
+moko.go - question and answer system
+
 
