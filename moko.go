@@ -26,4 +26,10 @@ func main() {
 
 // question and answer stream
 
+// each individual question is 
+// stored in a json flat file on disk
+// on server start, cache in memory as []byte
+// select one from key list to ask
+// keep track of player stream
+
 
