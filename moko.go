@@ -6,6 +6,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"time"
 )
 
 const (
@@ -18,7 +19,7 @@ func MokoHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fmt.Printf("okaq web start on localhost:8080\n%s\n", time.Now().Stirng())
+	fmt.Printf("okaq web start on localhost:8080\n%s\n", time.Now().String())
 	http.HandleFunc("/", MokoHandler)
 	http.ListenAndServe(":8080", nil)
 }
