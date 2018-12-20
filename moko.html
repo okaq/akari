@@ -55,8 +55,18 @@ var db = {
         // layout renders elements to page
         // state encapsulated in data set properties
         // events pass conditional to jump to next screen
-        db.a = {};
 
+        // cache
+        db.a = {};
+        db.a["swan"] = {};
+        db.a["swan"].e = []; // elements
+        db.a["swan"].s = []; // state
+        db.a["swan"].h = []; // handlers
+        // individual parties retrievable par index
+
+        // keys list
+        db.b = [];
+        db.b[0] = "swan";
     }
 }
 // scene
