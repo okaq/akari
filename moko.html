@@ -46,6 +46,12 @@ var g = {
             // we could do a single line text console
             // and even load a magical themed font
             // with css animations fade / shake
+
+            ren.clear();
+            var t0 = window.performance.now();
+            ren.check();
+            console.log("swan render time: " + window.performance.now() - t0);
+            console.log("4x4 checkerboard. width = 480. height = 270. total particle count = 129600.");
         }
 }
 // config
@@ -72,13 +78,30 @@ var db = {
 // scene
 var sce = {
     "init": function() {
+        // bkgd
         sce.a = {};
+        sce.a.r = [1920,1080,0,0];
+        sce.a.c = dom.canvas(sce.a.r);
+        dom.add(sce.a.c);
+        sce.a.d = rgba.mono(255);
+        sce.a.c.can.dataset.x = "bkgd";
+        sce.a.c.can.addEventListener("click", sce.click, false);
+    },
+    "click": function(e) {
+        console.log(e);
     }
 }
 // render
 var ren = {
     "clear": function() {
-
+        sce.a.c.con.fillStyle = sce.a.d;
+        sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+    },
+    "check": function() {
+        // 4x4 checkerboard
+        var nx = 480;
+        var ny = 270;
+        var nt = 129600;
     }
 }
 // xhr
