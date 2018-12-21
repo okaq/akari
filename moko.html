@@ -50,8 +50,13 @@ var g = {
             ren.clear();
             var t0 = window.performance.now();
             ren.check();
-            console.log("swan render time: " + window.performance.now() - t0);
+            console.log("swan render time: " + (window.performance.now() - t0));
             console.log("4x4 checkerboard. width = 480. height = 270. total particle count = 129600.");
+            
+            // approx 430ms full frame HD particle render
+            // interpolate to estimate sub-100ms render latency
+            // is about one "quad" of 1080p
+            // 960x540
         }
 }
 // config
@@ -102,6 +107,31 @@ var ren = {
         var nx = 480;
         var ny = 270;
         var nt = 129600;
+        for (var i = 0; i < 129600; i++) {
+            var y0 = (i / nx) >>> 0;
+            var y1 = y0 % 2;
+            var i1 = i % 2;
+            if (i1 == 0) {
+                if (y1 == 0) {
+                    sce.a.c.con.fillStyle = rgba.mono(255);
+                } else {
+                    sce.a.c.con.fillStyle = rgba.mono(0);
+                }
+            } else {
+                if (y1 == 1) {
+                    sce.a.c.con.fillStyle = rgba.mono(255);
+                } else {
+                    sce.a.c.con.fillStyle = rgba.mono(0);
+                }
+                // expensive!
+                // batch style calls
+                // ok for now as we are testing absolute performance
+            }
+            var x0 = i % nx;
+            var x1 = (x0 * 4) >>> 0;
+            var y2 = (y0 * 4) >>> 0;
+            sce.a.c.con.fillRect(x1,y2,4,4);
+        }
     }
 }
 // xhr
