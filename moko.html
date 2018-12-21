@@ -67,6 +67,22 @@ var g = {
             // and some of the elements have offscreen buffers, timers, frames
             // functional procedural animation
             
+            // clear
+            ren.clear();
+            // split
+            var t0 = window.performance.now();
+            // grab the pixel data
+            sce.data();
+            // randomize
+            sce.shuf();
+            // render
+            ren.data();
+            console.log("pixel manip time: " + (window.performance.now() - t0));
+            // random field 200ms
+            // translates to half screen for sub 100ms render latency
+
+            // two plasma methods
+            // diamond and sine wave
         }
 }
 // config
@@ -104,6 +120,20 @@ var sce = {
     },
     "click": function(e) {
         console.log(e);
+    },
+    "data": function() {
+        sce.a.p = sce.a.c.con.getImageData(0,0,sce.a.c.can.width,sce.a.c.can.height);
+        console.log("pixel count full hd: " + sce.a.p.data.length);
+    },
+    "shuf": function() {
+        for (var i = 0; i < 2073600; i++) {
+            var i0 = (i * 4) >>> 0;
+            var c0 = rgba.rc();
+            sce.a.p.data[i0+0] = c0[0];
+            sce.a.p.data[i0+1] = c0[1];
+            sce.a.p.data[i0+2] = c0[2];
+            sce.a.p.data[i0+3] = 255; // alpha saturate
+        }
     }
 }
 // render
@@ -142,6 +172,9 @@ var ren = {
             var y2 = (y0 * 4) >>> 0;
             sce.a.c.con.fillRect(x1,y2,4,4);
         }
+    },
+    "data": function() {
+        sce.a.c.con.putImageData(sce.a.p,0,0);
     }
 }
 // xhr
