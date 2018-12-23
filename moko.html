@@ -83,6 +83,19 @@ var g = {
 
             // two plasma methods
             // diamond and sine wave
+            window.setTimeout(g.plasma1, 2000);
+        },
+        "plasma1": function() {
+            // polar circles
+            // clear
+            ren.clear();
+            // split
+            var t0 = window.performance.now();
+            // concentric
+            sce.circle();
+            // render
+            ren.data();
+            console.log("plasma one time: " + (window.performance.now() - t0));
         }
 }
 // config
@@ -134,6 +147,16 @@ var sce = {
             sce.a.p.data[i0+2] = c0[2];
             sce.a.p.data[i0+3] = 255; // alpha saturate
         }
+    },
+    "circle": function() {
+
+    },
+    "polar": function(p0) {
+        // input cartesian point
+        // output radius, theta pair
+        var r0 = (Math.sqrt((p0[0] * p0[0]) + (p0[1] * p0[1]))) >>> 0;
+        var t0 = Math.atan(p0[1] / p0[0]);
+        return [r0,t0];
     }
 }
 // render
