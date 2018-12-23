@@ -149,14 +149,49 @@ var sce = {
         }
     },
     "circle": function() {
+        for (var i = 0; i < 2073600; i++) {
+            var i0 = (i * 4) >>> 0;
+            // radial gradient
+            var x0 = i % 1920;
+            var y0 = (i / 1920) >>> 0;
+            // center origin offset
+            var x1 = (1920 / 2) >>> 0;
+            var y1 = (1080 / 2) >>> 0;
+            var x2 = x0 - x1
+            var y2 = y0 - y1;
+            // polar radius
+            var p0 = sce.polar([x2,y2]);
+            var r0 = p0[0];
+            // cartesian distance ratio
+            var r1 = Math.sqrt((x1 * x1) + (y1 * y1));
+            var r2 = Math.sqrt(r0 * r0);
+            var r3 = r2 / r1;
+            var c0 = (255 * r3) >>> 0;
+            if (i == 0) {
+                console.log(x0,y0,x1,y1,x2,y2,r0,r1,r2,r3,c0);
+                // debug: note where to apply floor
+                // preserve float, neg values on points until color
+            }
+            sce.a.p.data[i0+0] = c0;
+            sce.a.p.data[i0+1] = c0;
+            sce.a.p.data[i0+2] = c0;
+            sce.a.p.data[i0+3] = 255; // alpha saturate
 
+        }
     },
     "polar": function(p0) {
         // input cartesian point
         // output radius, theta pair
-        var r0 = (Math.sqrt((p0[0] * p0[0]) + (p0[1] * p0[1]))) >>> 0;
+        var r0 = Math.sqrt((p0[0] * p0[0]) + (p0[1] * p0[1]));
         var t0 = Math.atan(p0[1] / p0[0]);
         return [r0,t0];
+    },
+    "cart": function(p0) {
+        // other side of the coin
+        // input format = [r,theta]
+        var x0 = (p0[0] * (Math.cos(p0[1]))) >>> 0;
+        var y0 = (p0[0] * (Math.sin(p0[1]))) >>> 0;
+        return [x0,y0];
     }
 }
 // render

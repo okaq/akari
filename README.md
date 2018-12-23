@@ -21,4 +21,6 @@ lada.go - bitmap json decode and render test
 
 moko.go - question and answer system
 
+noko.go - favicon generator (32x32 PNG)
+
 
