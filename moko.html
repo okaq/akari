@@ -98,6 +98,16 @@ var g = {
             // render
             ren.data();
             console.log("plasma one time: " + (window.performance.now() - t0));
+
+            // diamond
+            window.setTimeout(g.plasma2, 2000);
+        },
+        "plasma2": function() {
+            ren.clear();
+            var t0 = window.performance.now();
+            sce.plasma2();
+            ren.data();
+            console.log("plasma diamond time: " + (window.performance.now() - t0));
         }
 }
 // config
@@ -220,6 +230,51 @@ var sce = {
             sce.a.p.data[i0+2] = c0;
             sce.a.p.data[i0+3] = 255; // alpha saturate
         }
+    },
+    "plasma2": function() {
+        // use centered 1024x1024 square
+        // four corners
+        dia.set(dia.rand(),[0,0]);
+        dia.set(dia.rand(),[1023,0]);
+        dia.set(dia.rand(),[0,1023]);
+        dia.set(dia.rand(),[1023,1023]);
+
+        // random test
+        sce.tick = 0;
+        sce.id = window.setInterval(sce.rand, 1000);
+    },
+    "rand": function() {
+        if (sce.tick >= 128) {
+            window.clearInterval(sce.id);
+        }
+        var p0 = dia.rip();
+        var c0 = dia.rand();
+        dia.set(c0,p0);
+    }
+}
+// diamond
+var dia = {
+    "get": function(p0) {
+        // get rgba value at point
+    },
+    "set": function(c0,p0) {
+        // set rgba at point
+    },
+    "rand": function() {
+        // rand mono with alpha = 255
+        var c0 = rgba.rb();
+        var c1 = [c0,c0,c0,255];
+        return c1;
+    },
+    "point": function(p0) {
+        // return index into data
+        // offset [448,28]
+        var y0 = (p0[1] + 28) >>> 0;
+        var x0 = (p0[0] + 448) >>> 0;
+        var y1 = (y0 * 1024 * 4) >>> 0;
+        var x1 = (x0 * 4) >>> 0;
+        var i0 = (x1 + y1) >>> 0;
+        return i0;
     }
 }
 // render
