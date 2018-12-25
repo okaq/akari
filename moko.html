@@ -253,9 +253,24 @@ var sce = {
         var q0 = dia.quad([0,0],[1023,1023]);
         console.log(q0);
 
+        for (var i = 0; i < q0.length; i++) {
+            var q1 = q0[i];
+            // dia.edge(q1[0],q1[1]);
+            // dia.cent(q1[0],q1[1]);
+            sce.dig(q1);
+        }
+
+        // dig the major quad
+
         // random test
         sce.tick = 0;
         // sce.id = window.setInterval(sce.rand, 1000);
+    },
+    "dig": function(q0) {
+        // recurse on quad until 16x16
+        dia.edge(q0[0],q0[1]);
+        dia.cent(q0[0],q0[1]);
+        var q1 = dia.quad(q0[0],q0[1]);
     },
     "rand": function() {
         if (sce.tick >= 128) {
@@ -334,7 +349,7 @@ var dia = {
         // walk
         var ct3 = dia.walk(ct2);
         var ct4 = ct3 + 1;
-        console.log(pt0,pt1,ct0,ct1,ct2,ct3,ct4);
+        // console.log(pt0,pt1,ct0,ct1,ct2,ct3,ct4);
         dia.set([ct3],[pt0,p0[1]]);
         dia.set([ct4],[pt1,p0[1]]);
         
@@ -349,7 +364,7 @@ var dia = {
         // walk
         var cb3 = dia.walk(cb2);
         var cb4 = cb3 + 1;
-        console.log(pb0,pb1,cb0,cb1,cb2,cb3,cb4);
+        // console.log(pb0,pb1,cb0,cb1,cb2,cb3,cb4);
         dia.set([cb3],[pb0,p1[1]]);
         dia.set([cb4],[pb1,p1[1]]);
         
@@ -364,7 +379,7 @@ var dia = {
         // walk
         var cl3 = dia.walk(cl2);
         var cl4 = cl3 + 1;
-        console.log(pl0,pl1,cl0,cl1,cl2,cl3,cl4);
+        // console.log(pl0,pl1,cl0,cl1,cl2,cl3,cl4);
         dia.set([cl3],[p0[0],pl0]);
         dia.set([cl4],[p0[0],pl1]);
 
@@ -379,7 +394,7 @@ var dia = {
         // walk
         var cr3 = dia.walk(cr2);
         var cr4 = cr3 + 1;
-        console.log(pr0,pr1,cr0,cr1,cr2,cr3,cr4);
+        // console.log(pr0,pr1,cr0,cr1,cr2,cr3,cr4);
         dia.set([cr3],[p1[0],pr0]);
         dia.set([cr4],[p1[0],pr1]);
     },
