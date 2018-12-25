@@ -265,6 +265,7 @@ var sce = {
 
         // dig the major quad
         sce.dig([[0,0],[1023,1023]]);
+        // sce.dig([448,28],[1472,1052]);
 
         // random test
         sce.tick = 0;
@@ -275,12 +276,18 @@ var sce = {
         dia.edge(q0[0],q0[1]);
         dia.cent(q0[0],q0[1]);
         var x0 = q0[1][0] - q0[0][0];
-        console.log(x0);
-        if (x0 > 256) {
+        // console.log(x0);
+        if (x0 > 4) {
             var q1 = dia.quad(q0[0],q0[1]);
+            // console.log(q1);
             q1.forEach(function(el){sce.dig(el)});
+            // q1.forEach(function(el){var q1 = dia.quad(el[0],el[1]); console.log(q1);});
         }
         // max call stack exceeded at 256
+        // bug: forgot to add quad offset
+
+        // nice fractal pattern
+        // but offsets still missing
     },
     "rand": function() {
         if (sce.tick >= 128) {
@@ -349,7 +356,7 @@ var dia = {
     "edge": function(p0,p1) {
         // top
         // middle indicies
-        var pt0 = ((p1[0] - p0[0]) / 2) >>> 0;
+        var pt0 = (((p1[0] - p0[0]) / 2) + p0[0]) >>> 0;
         var pt1 = (pt0 + 1) >>> 0;
         // colors
         var ct0 = dia.get(p0);
@@ -364,7 +371,7 @@ var dia = {
         dia.set([ct4],[pt1,p0[1]]);
         
         // bottom
-        var pb0 = ((p1[0] - p0[0]) / 2) >>> 0;
+        var pb0 = (((p1[0] - p0[0]) / 2) + p0[0]) >>> 0;
         var pb1 = (pb0 + 1) >>> 0;
         // colors
         var cb0 = dia.get([p0[0],p1[1]]);
@@ -379,7 +386,7 @@ var dia = {
         dia.set([cb4],[pb1,p1[1]]);
         
         // left
-        var pl0 = ((p1[1] - p0[1]) / 2) >>> 0;
+        var pl0 = (((p1[1] - p0[1]) / 2) + p0[1]) >>> 0;
         var pl1 = (pl0 + 1) >>> 0;
         // colors
         var cl0 = dia.get(p0);
@@ -394,7 +401,7 @@ var dia = {
         dia.set([cl4],[p0[0],pl1]);
 
         // right
-        var pr0 = ((p1[1] - p0[1]) / 2) >>> 0;
+        var pr0 = (((p1[1] - p0[1]) / 2) + p0[1]) >>> 0;
         var pr1 = (pr0 + 1) >>> 0;
         // colors
         var cr0 = dia.get([p1[0],p0[1]]);
@@ -425,16 +432,18 @@ var dia = {
         var q0 = [];
         // x midpoint
         var px = ((p1[0] - p0[0]) / 2) >>> 0;
+        var px1 = (px + p0[0]) >>> 0;
         // y midpoint
         var py = ((p1[1] - p0[1]) / 2) >>> 0;
+        var py1 = (py + p0[1]);
         // top left
-        q0[0] = [p0,[px,py]];
+        q0[0] = [p0,[px1,py1]];
         // top right
-        q0[1] = [[px+1,p0[1]],[p1[0],py]];
+        q0[1] = [[px1+1,p0[1]],[p1[0],py1]];
         // bottom left
-        q0[2] = [[p0[0],py+1],[px,p1[1]]];
+        q0[2] = [[p0[0],py1+1],[px1,p1[1]]];
         // bottom right
-        q0[3] = [[px+1,py+1],p1];
+        q0[3] = [[px1+1,py1+1],p1];
         return q0;
     },
     "cent": function(p0,p1) {
