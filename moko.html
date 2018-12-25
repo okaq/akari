@@ -103,7 +103,9 @@ var g = {
             window.setTimeout(g.plasma2, 2000);
         },
         "plasma2": function() {
+            // sce.data();
             ren.clear();
+            sce.data();
             var t0 = window.performance.now();
             sce.plasma2();
             ren.data();
@@ -244,12 +246,19 @@ var sce = {
         sce.id = window.setInterval(sce.rand, 1000);
     },
     "rand": function() {
-        if (sce.tick >= 128) {
+        if (sce.tick >= 1280) {
             window.clearInterval(sce.id);
         }
         var p0 = dia.rip();
         var c0 = dia.rand();
         dia.set(c0,p0);
+
+        // update
+        ren.clear();
+        ren.data();
+
+        console.log("tick #" + sce.tick + ": mono = " + c0[0] + " x = " + p0[0] + " y = " + p0[1]);
+        sce.tick = sce.tick + 1;
     }
 }
 // diamond
@@ -259,6 +268,12 @@ var dia = {
     },
     "set": function(c0,p0) {
         // set rgba at point
+        var i0 = dia.point(p0);
+        sce.a.p.data[i0+0] = c0[0];
+        sce.a.p.data[i0+1] = c0[0];
+        sce.a.p.data[i0+2] = c0[0];
+        sce.a.p.data[i0+3] = 255; // alpha saturate
+
     },
     "rand": function() {
         // rand mono with alpha = 255
@@ -275,6 +290,12 @@ var dia = {
         var x1 = (x0 * 4) >>> 0;
         var i0 = (x1 + y1) >>> 0;
         return i0;
+    },
+    "rip": function() {
+        // random point
+        var x0 = (Math.random() * 1920) >>> 0;
+        var y0 = (Math.random() * 1080) >>> 0;
+        return [x0,y0];
     }
 }
 // render
