@@ -247,6 +247,11 @@ var sce = {
         console.log("color at [1023,1023]: " + dia.get([1023,1023]));
         // set edges
         dia.edge([0,0],[1023,1023]);
+        // set center
+        dia.cent([0,0],[1023,1023]);
+        // get quads
+        var q0 = dia.quad([0,0],[1023,1023]);
+        console.log(q0);
 
         // random test
         sce.tick = 0;
@@ -390,6 +395,25 @@ var dia = {
             b1 = 255;
         }
         return b1 >>> 0;
+    },
+    "quad": function(p0,p1) {
+        var q0 = [];
+        // x midpoint
+        var px = ((p1[0] - p0[0]) / 2) >>> 0;
+        // y midpoint
+        var py = ((p1[1] - p0[1]) / 2) >>> 0;
+        // top left
+        q0[0] = [p0,[px,py]];
+        // top right
+        q0[1] = [[px+1,p0[1]],[p1[0],py]];
+        // bottom left
+        q0[2] = [[p0[0],py+1],[px,p1[1]]];
+        // bottom right
+        q0[3] = [[px+1,py+1],p1];
+        return q0;
+    },
+    "cent": function(p0,p1) {
+
     }
 }
 // render
