@@ -240,13 +240,15 @@ var sce = {
         dia.set(dia.rand(),[1023,0]);
         dia.set(dia.rand(),[0,1023]);
         dia.set(dia.rand(),[1023,1023]);
+        // set edges
+        dia.edge([0,0],[1023,1023]);
 
         // random test
         sce.tick = 0;
         sce.id = window.setInterval(sce.rand, 1000);
     },
     "rand": function() {
-        if (sce.tick >= 1280) {
+        if (sce.tick >= 128) {
             window.clearInterval(sce.id);
         }
         var p0 = dia.rip();
@@ -265,6 +267,13 @@ var sce = {
 var dia = {
     "get": function(p0) {
         // get rgba value at point
+        var i0 = dia.point(p0);
+        var c0 = [];
+        c0[0] = sce.a.p.data[i0+0];
+        c0[1] = sce.a.p.data[i0+1];
+        c0[2] = sce.a.p.data[i0+2];
+        c0[3] = sce.a.p.data[i0+3]; // alpha saturate
+        return c0;
     },
     "set": function(c0,p0) {
         // set rgba at point
@@ -296,6 +305,17 @@ var dia = {
         var x0 = (Math.random() * 1920) >>> 0;
         var y0 = (Math.random() * 1080) >>> 0;
         return [x0,y0];
+    },
+    "six": function(p0) {
+        // 4x4 pixel block indicies
+        var r0 = [];
+        return r0;
+    },
+    "edge": function(p0,p1) {
+        // top
+        // bottom
+        // left
+        // right
     }
 }
 // render
