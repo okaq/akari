@@ -413,7 +413,30 @@ var dia = {
         return q0;
     },
     "cent": function(p0,p1) {
-
+        // center 4 pixels
+        // average color
+        var c0 = dia.get(p0);
+        var c1 = dia.get([p1[0],p0[1]]);
+        var c2 = dia.get([p0[0],p1[1]]);
+        var c3 = dia.get(p1);
+        var c4 = ((c0[0] + c1[0] + c2[0] + c3[0]) / 4) >>> 0;
+        // walk
+        var c5 = dia.walk(c4);
+        var c6 = dia.walk(c4);
+        var c7 = dia.walk(c4);
+        var c8 = dia.walk(c4);
+        // x midpoint
+        var px = ((p1[0] - p0[0]) / 2) >>> 0;
+        // y midpoint
+        var py = ((p1[1] - p0[1]) / 2) >>> 0;
+        // top left center
+        dia.set([c5],[px,py]);
+        // top right center
+        dia.set([c6],[px+1,py]);
+        // bottom left center
+        dia.set([c7],[px,py+1]);
+        // bottom right center
+        dia.set([c8],[px+1,py+1]);
     }
 }
 // render
