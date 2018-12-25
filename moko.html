@@ -240,12 +240,17 @@ var sce = {
         dia.set(dia.rand(),[1023,0]);
         dia.set(dia.rand(),[0,1023]);
         dia.set(dia.rand(),[1023,1023]);
+        // debug
+        console.log("color at [0,0]: " + dia.get([0,0]));
+        console.log("color at [1023,0]: " + dia.get([1023,0]));
+        console.log("color at [0,1023]: " + dia.get([0,1023]));
+        console.log("color at [1023,1023]: " + dia.get([1023,1023]));
         // set edges
         dia.edge([0,0],[1023,1023]);
 
         // random test
         sce.tick = 0;
-        sce.id = window.setInterval(sce.rand, 1000);
+        // sce.id = window.setInterval(sce.rand, 1000);
     },
     "rand": function() {
         if (sce.tick >= 128) {
@@ -313,9 +318,34 @@ var dia = {
     },
     "edge": function(p0,p1) {
         // top
+        // middle indicies
+        var pt0 = ((p1[0] - p0[0]) / 2) >>> 0;
+        var pt1 = (pt0 + 1) >>> 0;
+        // colors
+        var ct0 = dia.get(p0);
+        var ct1 = dia.get(p1);
+        // interp
+        var ct2 = ((ct0[0] + ct1[0]) / 2) >>> 0;
+        // walk
+        var ct3 = dia.walk(ct2);
+        var ct4 = ct3 + 1;
+        console.log(pt0,pt1,ct0,ct1,ct2,ct3,ct4);
         // bottom
         // left
         // right
+    },
+    "walk": function(b0) {
+        // perturb a byte
+        var f0 = (Math.random() * 4) - 2;
+        var b1 = b0 + f0;
+        // clamp
+        if (b1 < 0) {
+            b1 = 0;
+        }
+        if (b1 > 255) {
+            b1 = 255;
+        }
+        return b1 >>> 0;
     }
 }
 // render
