@@ -323,16 +323,60 @@ var dia = {
         var pt1 = (pt0 + 1) >>> 0;
         // colors
         var ct0 = dia.get(p0);
-        var ct1 = dia.get(p1);
+        var ct1 = dia.get([p1[0],p0[1]]);
         // interp
         var ct2 = ((ct0[0] + ct1[0]) / 2) >>> 0;
         // walk
         var ct3 = dia.walk(ct2);
         var ct4 = ct3 + 1;
         console.log(pt0,pt1,ct0,ct1,ct2,ct3,ct4);
+        dia.set([ct3],[pt0,p0[1]]);
+        dia.set([ct4],[pt1,p0[1]]);
+        
         // bottom
+        var pb0 = ((p1[0] - p0[0]) / 2) >>> 0;
+        var pb1 = (pb0 + 1) >>> 0;
+        // colors
+        var cb0 = dia.get([p0[0],p1[1]]);
+        var cb1 = dia.get(p1);
+        // interp
+        var cb2 = ((cb0[0] + cb1[0]) / 2) >>> 0;
+        // walk
+        var cb3 = dia.walk(cb2);
+        var cb4 = cb3 + 1;
+        console.log(pb0,pb1,cb0,cb1,cb2,cb3,cb4);
+        dia.set([cb3],[pb0,p1[1]]);
+        dia.set([cb4],[pb1,p1[1]]);
+        
         // left
+        var pl0 = ((p1[1] - p0[1]) / 2) >>> 0;
+        var pl1 = (pl0 + 1) >>> 0;
+        // colors
+        var cl0 = dia.get(p0);
+        var cl1 = dia.get([p0[0],p1[1]]);
+        // interp
+        var cl2 = ((cl0[0] + cl1[0]) / 2) >>> 0;
+        // walk
+        var cl3 = dia.walk(cl2);
+        var cl4 = cl3 + 1;
+        console.log(pl0,pl1,cl0,cl1,cl2,cl3,cl4);
+        dia.set([cl3],[p0[0],pl0]);
+        dia.set([cl4],[p0[0],pl1]);
+
         // right
+        var pr0 = ((p1[1] - p0[1]) / 2) >>> 0;
+        var pr1 = (pr0 + 1) >>> 0;
+        // colors
+        var cr0 = dia.get([p1[0],p0[1]]);
+        var cr1 = dia.get(p1);
+        // interp
+        var cr2 = ((cr0[0] + cr1[0]) / 2) >>> 0;
+        // walk
+        var cr3 = dia.walk(cr2);
+        var cr4 = cr3 + 1;
+        console.log(pr0,pr1,cr0,cr1,cr2,cr3,cr4);
+        dia.set([cr3],[p1[0],pr0]);
+        dia.set([cr4],[p1[0],pr1]);
     },
     "walk": function(b0) {
         // perturb a byte
