@@ -245,6 +245,8 @@ var sce = {
         console.log("color at [1023,0]: " + dia.get([1023,0]));
         console.log("color at [0,1023]: " + dia.get([0,1023]));
         console.log("color at [1023,1023]: " + dia.get([1023,1023]));
+
+        /*
         // set edges
         dia.edge([0,0],[1023,1023]);
         // set center
@@ -259,8 +261,10 @@ var sce = {
             // dia.cent(q1[0],q1[1]);
             sce.dig(q1);
         }
+        */
 
         // dig the major quad
+        sce.dig([[0,0],[1023,1023]]);
 
         // random test
         sce.tick = 0;
@@ -270,7 +274,13 @@ var sce = {
         // recurse on quad until 16x16
         dia.edge(q0[0],q0[1]);
         dia.cent(q0[0],q0[1]);
-        var q1 = dia.quad(q0[0],q0[1]);
+        var x0 = q0[1][0] - q0[0][0];
+        console.log(x0);
+        if (x0 > 256) {
+            var q1 = dia.quad(q0[0],q0[1]);
+            q1.forEach(function(el){sce.dig(el)});
+        }
+        // max call stack exceeded at 256
     },
     "rand": function() {
         if (sce.tick >= 128) {
