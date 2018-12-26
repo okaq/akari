@@ -74,6 +74,24 @@ func Solid() {
 
 func Square() {
 	// two color square within a square
+	c0 := color.RGBA{250,250,250,255}
+	c1 := color.RGBA{10,10,10,255}
+	dx := I.Bounds().Dx()
+	dx2 := dx / 4
+	dx3 := 3 * dx / 4
+	dy = I.Bounds().Dy()
+	dy2 := dy / 4
+	dy3 := 3 * dy / 4
+	b := dx * dy
+	for i := 0; i < b; i++ {
+		x := i % dx
+		y := i / dx
+		if x > dx2 && x <= dx3 && y > dy2 && y <= dy3 {
+			I.SetRGBA(x,y,c0)
+		} else {
+			I.SetRGBA(x,y,c1)
+		}
+	}
 }
 
 func main() {
@@ -85,7 +103,7 @@ func main() {
 	Pixels()
 	// generator
 	Solid()
-	// Block()
+	// Square()
 }
 
 
