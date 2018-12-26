@@ -94,6 +94,29 @@ func Square() {
 	}
 }
 
+func Write() {
+	// png file
+	err := png.Encode(Pn, I)
+	if err != nil {
+		fmt.Println(err)
+	}
+	// png data
+	f, err := Pn.Stat()
+	if err != nil {
+		fmt.Println(err)
+	}
+	d := make([]byte, f.Size())
+	_, err := Pn.Seek(0,0)
+	if err != nil {
+		fmt.Println(err)
+	}
+	_, err := Pn.Read(d)
+	if err != nil {
+		fmt.Println(err)
+	}
+	// json encode
+}
+
 func main() {
 	T = time.Now()
 	fmt.Printf("okaq favicon generator start: %s\n", time.Now().String())
@@ -104,6 +127,7 @@ func main() {
 	// generator
 	Solid()
 	// Square()
+	Write()
 }
 
 
