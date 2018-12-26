@@ -54,12 +54,35 @@ func Files() {
 	}
 }
 
+func Pixels() {
+	r := image.Rect(0,0,32,32)
+	I = image.NewRGBA(r)
+}
+
+func Solid() {
+	// generate a solid color favicon
+	c := color.RGBA{128,128,128,255}
+	dx := I.Bounds().Dx()
+	dy := I.Bounds().Dy()
+	b := dx * dy
+	for i := 0; i < b; i++ {
+		x := i % dx
+		y := i / dx
+		I.SetRGBA(x,y,c)
+	}
+}
+
+func Square() {
+	// two color square within a square
+}
+
 func main() {
 	T = time.Now()
 	fmt.Printf("okaq favicon generator start: %s\n", time.Now().String())
 	Files()
 	defer Pn.Close()
 	defer Js.Close()
+	Pixels()
 	// generator
 	Solid()
 	// Block()
