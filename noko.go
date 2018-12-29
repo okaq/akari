@@ -6,7 +6,7 @@ package main
 
 import (
 	"encoding/base64"
-	// "encoding/json"
+	"encoding/json"
 	"fmt"
 	"image"
 	"image/color"
@@ -118,6 +118,16 @@ func Write() {
 	// json encode
 	s := base64.StdEncoding.EncodeToString(d)
 	fmt.Println(f,d,s)
+	uri := fmt.Sprintf("data:image/png;base64,%s", s)
+	fmt.Println(uri)
+	fav := struct { DataURI string } { uri }
+	fmt.Println(fav)
+	json, err := json.Marshal(fav)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(string(json))
+
 }
 
 func main() {
@@ -128,8 +138,8 @@ func main() {
 	defer Js.Close()
 	Pixels()
 	// generator
-	Solid()
-	// Square()
+	// Solid()
+	Square()
 	Write()
 }
 
