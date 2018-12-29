@@ -127,7 +127,17 @@ func Write() {
 		fmt.Println(err)
 	}
 	fmt.Println(string(json))
-
+	_, err = Js.Write(json)
+	if err != nil {
+		fmt.Println(err)
+	}
+	g, err := Js.Stat()
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println("png and json files sccessfully encoded and written to disk")
+	fmt.Printf("png size: %d bytes\n", f.Size())
+	fmt.Printf("json size: %d bytes\n", g.Size())
 }
 
 func main() {
@@ -138,8 +148,8 @@ func main() {
 	defer Js.Close()
 	Pixels()
 	// generator
-	// Solid()
-	Square()
+	Solid()
+	// Square()
 	Write()
 }
 
