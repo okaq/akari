@@ -6,11 +6,12 @@ package main
 
 import (
 	"encoding/base64"
-	"encoding/json"
+	// "encoding/json"
 	"fmt"
 	"image"
 	"image/color"
 	"image/png"
+	"os"
 	"time"
 )
 
@@ -79,7 +80,7 @@ func Square() {
 	dx := I.Bounds().Dx()
 	dx2 := dx / 4
 	dx3 := 3 * dx / 4
-	dy = I.Bounds().Dy()
+	dy := I.Bounds().Dy()
 	dy2 := dy / 4
 	dy3 := 3 * dy / 4
 	b := dx * dy
@@ -106,15 +107,17 @@ func Write() {
 		fmt.Println(err)
 	}
 	d := make([]byte, f.Size())
-	_, err := Pn.Seek(0,0)
+	_, err = Pn.Seek(0,0)
 	if err != nil {
 		fmt.Println(err)
 	}
-	_, err := Pn.Read(d)
+	_, err = Pn.Read(d)
 	if err != nil {
 		fmt.Println(err)
 	}
 	// json encode
+	s := base64.StdEncoding.EncodeToString(d)
+	fmt.Println(f,d,s)
 }
 
 func main() {
