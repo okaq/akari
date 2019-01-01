@@ -37,7 +37,9 @@ var g = {
             window.setTimeout(g.start, 1000);
         },
         "start": function() {
-            // cells setup
+            // cells render test
+            ren.bkgd();
+            ren.cells();
         }
 }
 // scene
@@ -63,6 +65,20 @@ var sce = {
             sce.b[i].r = [20,20,x1,y1];
             sce.b[i].c = dom.canvas(sce.b[i].r);
             dom.add(sce.b[i].c);
+        }
+    }
+}
+// render
+var ren = {
+    "bkgd": function() {
+        sce.a.c.con.fillStyle = rgba.mono(255);
+        sce.a.c.con.fillRect(0,0,sce.a.c.can.width,sce.a.c.can.height);
+    },
+    "cells": function() {
+        for (var i = 0; i < sce.b.length; i++) {
+            // left most column as generator
+            sce.b[i].c.con.fillStyle = rgba.rmon();
+            sce.b[i].c.con.fillRect(0,0,sce.b[i].c.can.width,sce.b[i].c.can.height);
         }
     }
 }
