@@ -30,7 +30,7 @@ var g = {
             console.log("start akari...");
 
             // subs
-            g.subs = [dom,sce];
+            g.subs = [dom,bmp,sce];
             g.subs.forEach(function(el){el.init();});
 
             // wait and begin
@@ -45,8 +45,25 @@ var sce = {
     "init": function() {
         // bkgd
         sce.a = {};
+        sce.a.r = [1920,1080,0,0];
+        sce.a.c = dom.canvas(sce.a.r);
+        dom.add(sce.a.c);
         // cells
         sce.b = [];
+        // 20x20 pixel blocks
+        var nx = (1920 / 20) >>> 0;
+        var ny = (1080 / 20) >>> 0;
+        var nt =  (nx * ny) >>> 0;
+        for (var i = 0; i < nt; i++) {
+            var x0 = i % nx;
+            var y0 = (i / nx) >>> 0;
+            var x1 = (x0 * 20) >>> 0;
+            var y1 = (y0 * 20) >>> 0;
+            sce.b[i] = {};
+            sce.b[i].r = [20,20,x1,y1];
+            sce.b[i].c = dom.canvas(sce.b[i].r);
+            dom.add(sce.b[i].c);
+        }
     }
 }
     // dom
