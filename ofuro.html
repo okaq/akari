@@ -52,6 +52,9 @@ var g = {
             // increment by column
             // starting at left margin to right
 
+            // sweep incrementor from top of flame
+            // in per frame animation loop
+
             window.setTimeout(g.start3, 2000);
         },
         "start3": function() {
@@ -113,8 +116,12 @@ var sce = {
                 var n0 = (255 / sce.c.nx) >>> 0;
                 // random
                 // var n1 = ((Math.random() * (2 * n0)) - n0) >>> 0;
-                var n1 = ((Math.random() * 4) * n0) >>> 0;
-                var d1 = sce.d[i1] - n1;
+                // var n1 = ((Math.random() * 4) * n0) >>> 0;
+                // var d1 = sce.d[i1] - n1;
+                // walk
+                var n1 = ((Math.random() * 8) - 4) >>> 0;
+                var n2 = n0 * n1;
+                var d1 = (sce.d[i1] + n2) >>> 0;
                 if (d1 > 255) {
                     d1 = 255;
                 } 
