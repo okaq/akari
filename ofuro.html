@@ -40,6 +40,24 @@ var g = {
             // cells render test
             ren.bkgd();
             ren.cells();
+
+            window.setTimeout(g.start2, 2000);
+        },
+        "start2": function() {
+            // linear test
+            ren.bkgd();
+            sce.data();
+            ren.data();
+
+            // increment by column
+            // starting at left margin to right
+
+            window.setTimeout(g.start3, 2000);
+        },
+        "start3": function() {
+            ren.bkgd();
+            sce.line();
+            ren.data();
         }
 }
 // scene
@@ -53,18 +71,58 @@ var sce = {
         // cells
         sce.b = [];
         // 20x20 pixel blocks
-        var nx = (1920 / 20) >>> 0;
-        var ny = (1080 / 20) >>> 0;
-        var nt =  (nx * ny) >>> 0;
-        for (var i = 0; i < nt; i++) {
-            var x0 = i % nx;
-            var y0 = (i / nx) >>> 0;
-            var x1 = (x0 * 20) >>> 0;
-            var y1 = (y0 * 20) >>> 0;
+        // metadata
+        sce.c = {};
+        sce.c.w = 20;
+        sce.c.h = 20;
+        sce.c.nx = (1920 / sce.c.w) >>> 0;
+        sce.c.ny = (1080 / sce.c.h) >>> 0;
+        sce.c.nt =  (sce.c.nx * sce.c.ny) >>> 0;
+        for (var i = 0; i < sce.c.nt; i++) {
+            var x0 = i % sce.c.nx;
+            var y0 = (i / sce.c.nx) >>> 0;
+            var x1 = (x0 * sce.c.w) >>> 0;
+            var y1 = (y0 * sce.c.h) >>> 0;
             sce.b[i] = {};
-            sce.b[i].r = [20,20,x1,y1];
+            sce.b[i].r = [sce.c.w,sce.c.h,x1,y1];
             sce.b[i].c = dom.canvas(sce.b[i].r);
             dom.add(sce.b[i].c);
+        }
+    },
+    "data": function() {
+        // initial conditions
+        sce.d = [];
+        for (var i = 0; i < sce.c.nt; i++) {
+            var x0 = i % sce.c.nx;
+            if (x0 == 0) {
+                sce.d[i] = 255;
+            } else {
+                sce.d[i] = 0;
+            }
+        }
+    },
+    "line": function() {
+        // increment by column
+        for (var y = 0; y < sce.c.ny; y++) {
+            for (var x = 1; x < sce.c.nx; x++) {
+                // index into pixels
+                var i0 = ((y * sce.c.nx) + x) >>> 0;
+                // previous column
+                var i1 = (((y - 0)  * sce.c.nx) + x - 1) >>> 0;
+                // step
+                var n0 = (255 / sce.c.nx) >>> 0;
+                // random
+                // var n1 = ((Math.random() * (2 * n0)) - n0) >>> 0;
+                var n1 = ((Math.random() * 4) * n0) >>> 0;
+                var d1 = sce.d[i1] - n1;
+                if (d1 > 255) {
+                    d1 = 255;
+                } 
+                if (d1 <= 0) {
+                    d1 = 0;
+                }
+                sce.d[i0] = d1;
+            }
         }
     }
 }
@@ -78,6 +136,13 @@ var ren = {
         for (var i = 0; i < sce.b.length; i++) {
             // left most column as generator
             sce.b[i].c.con.fillStyle = rgba.rmon();
+            sce.b[i].c.con.fillRect(0,0,sce.b[i].c.can.width,sce.b[i].c.can.height);
+        }
+    },
+    "data": function() {
+        for (var i = 0; i < sce.b.length; i++) {
+            // left most column as generator
+            sce.b[i].c.con.fillStyle = rgba.mono(sce.d[i]);
             sce.b[i].c.con.fillRect(0,0,sce.b[i].c.can.width,sce.b[i].c.can.height);
         }
     }
