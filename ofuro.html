@@ -61,6 +61,24 @@ var g = {
             ren.bkgd();
             sce.line();
             ren.data();
+
+            // set up loop
+            g.tick = 0;
+            // reset generator
+            sce.data();
+            g.id = window.setInterval(g.start4, 1000);
+        },
+        "start4": function() {
+            console.log("tick count: " + g.tick);
+            if (g.tick >= 128) {
+                console.log("anim done");
+                window.clearInterval(g.id);
+            }
+            // sweep from top left down to generator
+            sce.sweep();
+            ren.data();
+            // pause after a given inteval to allow propagation
+            g.tick = g.tick + 1;
         }
 }
 // scene
@@ -129,6 +147,21 @@ var sce = {
                     d1 = 0;
                 }
                 sce.d[i0] = d1;
+            }
+        }
+    },
+    "sweep": function() {
+        // top down flame propagation
+        for (var x = sce.c.nx - 1; x >= 1; x--) {
+            for (var y = 0; y < sce.c.ny; y++) {
+                // index current x
+                var i0 = ((y * sce.c.nx) + x) >>> 0;
+                // index previous x
+                var i1 = i0 - 1;
+                var d0 = sce.d[i0];
+                var d1 = sce.d[i1];
+                var d2 = ((d1 + d0) / 2) >>> 0;
+                sce.d[i0] = d2;
             }
         }
     }
