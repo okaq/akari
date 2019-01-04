@@ -75,7 +75,8 @@ var g = {
                 window.clearInterval(g.id);
             }
             // sweep from top left down to generator
-            sce.sweep();
+            // sce.sweep();
+            sce.sweep2();
             ren.data();
             // pause after a given inteval to allow propagation
             g.tick = g.tick + 1;
@@ -162,6 +163,17 @@ var sce = {
                 var d1 = sce.d[i1];
                 var d2 = ((d1 + d0) / 2) >>> 0;
                 sce.d[i0] = d2;
+            }
+        }
+    },
+    "sweep2": function() {
+        // top down flame decay
+        for (var x = sce.c.nx - 1; x >= 1; x--) {
+            for (var y = 0; y < sce.c.ny; y++) {
+                // current index
+                var i0 = ((y * sce.c.nx) + x) >>> 0;
+                // previous index
+                var i1 = i0 - 1;
             }
         }
     }
