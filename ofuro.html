@@ -70,9 +70,10 @@ var g = {
         },
         "start4": function() {
             console.log("tick count: " + g.tick);
-            if (g.tick >= 128) {
+            if (g.tick >= 16) {
                 console.log("anim done");
                 window.clearInterval(g.id);
+                window.setTimeout(g.start5, 2000);
             }
             // sweep from top left down to generator
             // sce.sweep();
@@ -80,6 +81,12 @@ var g = {
             ren.data();
             // pause after a given inteval to allow propagation
             g.tick = g.tick + 1;
+        },
+        "start5": function() {
+            // animated maps
+            // setup tile generation
+            // vector map init
+            sce.data2();
         }
 }
 // scene
@@ -179,6 +186,19 @@ var sce = {
                 var d2 = (Math.random() * d1) >>> 0;
                 sce.d[i0] = d2;
             }
+        }
+    },
+    "data2": function() {
+        // texture
+        sce.d = [];
+        for (var i = 0; i < sce.c.nt; i++) {
+            sce.d[i] = 0;
+            // checker fill
+        }
+        // vector map
+        sce.e = [];
+        for (var i = 0; i < sce.c.nt; i++) {
+            sce.e[i] = 0;
         }
     }
 }
