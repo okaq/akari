@@ -87,6 +87,19 @@ var g = {
             // setup tile generation
             // vector map init
             sce.data2();
+            ren.data2();
+
+            // loop setup
+            g.tick = 0;
+            g.id = window.setInterval(g.start6, 1000);
+        },
+        "start6": function() {
+            console.log("tick count: " + g.tick);
+            if (g.tick >= 16) {
+                console.log("anim done");
+                window.clearInterval(g.id);
+            }
+            g.tick = g.tick + 1;
         }
 }
 // scene
@@ -221,6 +234,10 @@ var ren = {
             sce.b[i].c.con.fillStyle = rgba.mono(sce.d[i]);
             sce.b[i].c.con.fillRect(0,0,sce.b[i].c.can.width,sce.b[i].c.can.height);
         }
+    },
+    "data2": function() {
+        // apply vector map to grid
+        // render animation step
     }
 }
     // dom
